@@ -12,7 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="AsyncImageLoader.Avalonia" />
+        <PackageReference Include="AsyncImageLoader.Avalonia"/>
         <PackageReference Include="Avalonia"/>
         <PackageReference Include="Avalonia.Desktop"/>
         <PackageReference Include="Avalonia.Themes.Fluent"/>
@@ -27,27 +27,27 @@
         <PackageReference Include="Humanizer"/>
         <PackageReference Include="JetBrains.Annotations"/>
         <PackageReference Include="Material.Icons.Avalonia"/>
-        <PackageReference Include="Microsoft.Extensions.Configuration.Json" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json"/>
         <PackageReference Include="Microsoft.Extensions.DependencyInjection"/>
-        <PackageReference Include="Microsoft.Extensions.Http" />
-        <PackageReference Include="Microsoft.Extensions.Http.Resilience" />
-        <PackageReference Include="Polly" />
+        <PackageReference Include="Microsoft.Extensions.Http"/>
+        <PackageReference Include="Microsoft.Extensions.Http.Resilience"/>
+        <PackageReference Include="Polly"/>
         <PackageReference Include="Serilog"/>
         <PackageReference Include="Serilog.Sinks.Console"/>
         <PackageReference Include="Serilog.Sinks.File"/>
         <PackageReference Include="SukiUI"/>
-        <PackageReference Include="Tmds.DBus.Protocol" />
+        <PackageReference Include="Tmds.DBus.Protocol"/>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Drugly.DTO\Drugly.DTO.csproj" />
-        <ProjectReference Include="..\Drugly.Validation\Drugly.Validation.csproj" />
+        <ProjectReference Include="..\Drugly.DTO\Drugly.DTO.csproj"/>
+        <ProjectReference Include="..\Drugly.Validation\Drugly.Validation.csproj"/>
     </ItemGroup>
-    
+
     <ItemGroup>
-      <None Remove="appsettings.json" />
-      <Content Include="appsettings.json">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
+        <None Remove="appsettings.json"/>
+        <Content Include="appsettings.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
 </Project>

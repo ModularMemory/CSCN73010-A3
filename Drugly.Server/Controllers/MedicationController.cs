@@ -9,7 +9,7 @@ namespace Drugly.Server.Controllers;
 public class MedicationController : DruglyController
 {
     private readonly IMedicationDatabaseService _databaseService;
-    private readonly ILogger<MedicationController>  _logger;
+    private readonly ILogger<MedicationController> _logger;
 
     public MedicationController(
         IMedicationDatabaseService databaseService,
@@ -40,6 +40,7 @@ public class MedicationController : DruglyController
             _logger.LogError(ex, "Failed to fetch medication {id}", id);
             return InternalServerError(ApiResponse.Error("Internal server error"));
         }
+
         _logger.LogInformation("Medication {id} successfully retrieved", id);
         return Ok(response);
     }
@@ -81,6 +82,7 @@ public class MedicationController : DruglyController
             _logger.LogError(ex, "Failed to set medication {id}", id);
             return InternalServerError(ApiResponse.Error("Internal server error"));
         }
+
         _logger.LogInformation("Medication {id} successfully set", id);
         return Ok();
     }

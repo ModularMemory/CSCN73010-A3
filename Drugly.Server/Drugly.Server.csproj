@@ -6,12 +6,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Identity.UI" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.UI"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Drugly.DTO\Drugly.DTO.csproj" />
-      <ProjectReference Include="..\Drugly.Validation\Drugly.Validation.csproj" />
+        <ProjectReference Include="..\Drugly.DTO\Drugly.DTO.csproj"/>
+        <ProjectReference Include="..\Drugly.Validation\Drugly.Validation.csproj"/>
     </ItemGroup>
 
 </Project>

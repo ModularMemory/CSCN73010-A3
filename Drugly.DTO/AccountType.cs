@@ -8,8 +8,10 @@ public enum AccountType
 {
     /// <summary>Default value. The account is something else.</summary>
     Unknown,
+
     /// <summary>The account is a patient.</summary>
     Patient,
+
     /// <summary>The account is a doctor.</summary>
     Doctor,
 }

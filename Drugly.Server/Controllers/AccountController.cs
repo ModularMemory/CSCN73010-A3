@@ -16,7 +16,7 @@ public class AccountController : DruglyController
     private readonly IAuthorizationService _authorizationService;
 
     /// <summary>The logger object</summary>
-    private readonly ILogger<AccountController>  _logger;
+    private readonly ILogger<AccountController> _logger;
 
     /// <summary>The constructor for the Account controller for including dependencies</summary>
     /// <param name="databaseService">The database service</param>
@@ -63,6 +63,7 @@ public class AccountController : DruglyController
             _logger.LogError(ex, "Failed to fetch account {id}", id);
             return InternalServerError(ApiResponse.Error("Internal server error"));
         }
+
         _logger.LogInformation("Account {id} successfully retrieved", id);
         return Ok(response);
     }
@@ -80,6 +81,7 @@ public class AccountController : DruglyController
             _logger.LogInformation("User is not authorized");
             return Forbid(ApiResponse.Error("User is not authorized"));
         }
+
         ApiResponse<Guid> response = new ApiResponse<Guid>();
         Response.Headers.ContentType = "application/json";
 
@@ -97,6 +99,7 @@ public class AccountController : DruglyController
             _logger.LogError(ex, "Failed to fetch Id associated with email: {email}", email);
             return InternalServerError(ApiResponse.Error("Internal server error"));
         }
+
         _logger.LogInformation("Id associated with {email} successfully retrieved", email);
         return Ok(response);
     }
@@ -118,6 +121,7 @@ public class AccountController : DruglyController
             _logger.LogError(ex, "Failed to set account {id} details", id);
             return InternalServerError(ApiResponse.Error("Internal Server Error"));
         }
+
         _logger.LogInformation("Account {id} details successfully set", id);
         return Ok();
     }
@@ -188,7 +192,6 @@ public class AccountController : DruglyController
     [HttpDelete]
     public async Task<IActionResult> Logout()
     {
-
         if (!_authorizationService.DeleteSession(Request.Headers))
         {
             _logger.LogError("Logout failed");

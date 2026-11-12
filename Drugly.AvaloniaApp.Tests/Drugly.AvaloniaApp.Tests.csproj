@@ -11,22 +11,22 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
 
-        <PackageReference Include="Microsoft.NET.Test.Sdk" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk"/>
 
-        <PackageReference Include="NSubstitute" />
+        <PackageReference Include="NSubstitute"/>
 
         <PackageReference Include="xunit.runner.visualstudio">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
 
-        <PackageReference Include="xunit.v3" />
+        <PackageReference Include="xunit.v3"/>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Drugly.DTO\Drugly.DTO.csproj" />
-        <ProjectReference Include="..\Drugly.AvaloniaApp\Drugly.AvaloniaApp.csproj" />
-        <ProjectReference Include="..\Drugly.Validation\Drugly.Validation.csproj" />
+        <ProjectReference Include="..\Drugly.DTO\Drugly.DTO.csproj"/>
+        <ProjectReference Include="..\Drugly.AvaloniaApp\Drugly.AvaloniaApp.csproj"/>
+        <ProjectReference Include="..\Drugly.Validation\Drugly.Validation.csproj"/>
     </ItemGroup>
 
     <ItemGroup>

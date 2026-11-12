@@ -26,7 +26,7 @@ public class PrescriptionStateMachine : IAsyncDisposable, IDisposable
     /// <exception cref="ArgumentOutOfRangeException">Thrown when the current state is something undefined and doesn't know how to be handled</exception>
     public bool ProgressState(PrescriptionState newState)
     {
-        if (newState is PrescriptionState.Cancelled && prescription.State is not  PrescriptionState.Cancelled)
+        if (newState is PrescriptionState.Cancelled && prescription.State is not PrescriptionState.Cancelled)
         {
             prescription.State = PrescriptionState.Cancelled;
             return true;
@@ -40,6 +40,7 @@ public class PrescriptionStateMachine : IAsyncDisposable, IDisposable
                     prescription.State = PrescriptionState.PharmacyProcessing;
                     return true;
                 }
+
                 break;
 
             case PrescriptionState.PharmacyProcessing:
@@ -48,6 +49,7 @@ public class PrescriptionStateMachine : IAsyncDisposable, IDisposable
                     prescription.State = PrescriptionState.Filled;
                     return true;
                 }
+
                 break;
 
             case PrescriptionState.Filled:
@@ -56,6 +58,7 @@ public class PrescriptionStateMachine : IAsyncDisposable, IDisposable
                     prescription.State = PrescriptionState.Billing;
                     return true;
                 }
+
                 break;
 
             case PrescriptionState.Billing:
@@ -64,6 +67,7 @@ public class PrescriptionStateMachine : IAsyncDisposable, IDisposable
                     prescription.State = PrescriptionState.PickedUp;
                     return true;
                 }
+
                 break;
             case PrescriptionState.PickedUp:
                 if (newState is PrescriptionState.PharmacyProcessing)
@@ -71,6 +75,7 @@ public class PrescriptionStateMachine : IAsyncDisposable, IDisposable
                     prescription.State = PrescriptionState.PharmacyProcessing;
                     return true;
                 }
+
                 break;
 
             case PrescriptionState.Cancelled:
@@ -80,6 +85,7 @@ public class PrescriptionStateMachine : IAsyncDisposable, IDisposable
             default:
                 throw new ArgumentOutOfRangeException(nameof(PrescriptionState));
         }
+
         return false;
     }
 

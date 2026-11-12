@@ -12,11 +12,11 @@
              x:Class="Drugly.AvaloniaApp.Views.Pages.Doctor.DoctorPrescribeModalView"
              x:DataType="doctor:DoctorPrescribeModalViewModel"
              d:DataContext="{x:Static design:DesignData.DoctorPrescribeModalViewModel}">
-    <ScrollViewer  VerticalScrollBarVisibility="Auto"
-                   HorizontalScrollBarVisibility="Disabled"
-                   HorizontalAlignment="Stretch"
-                   VerticalAlignment="Stretch"
-                   IsScrollInertiaEnabled="True">
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Disabled"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  IsScrollInertiaEnabled="True">
         <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,*,Auto,Auto,Auto"
               RowSpacing="12">
             <!-- Heading -->

@@ -57,9 +57,10 @@ public static partial class DesignData
     public static Medication ExampleMedication => ExampleMedications[0];
 
     /// <summary>An example medication.</summary>
-    public static Prescription[] ExamplePrescriptions => [
-        new(Guid.NewGuid(), Guid.NewGuid(), "1", 1, 10, "no notes","https://upload.wikimedia.org/wikipedia/commons/1/15/Cat_August_2010-4.jpg"),
-        new(Guid.NewGuid(), Guid.NewGuid(), "5", 2, 30, "no notes","https://upload.wikimedia.org/wikipedia/commons/1/15/Cat_August_2010-4.jpg")
+    public static Prescription[] ExamplePrescriptions =>
+    [
+        new(Guid.NewGuid(), Guid.NewGuid(), "1", 1, 10, "no notes", "https://upload.wikimedia.org/wikipedia/commons/1/15/Cat_August_2010-4.jpg"),
+        new(Guid.NewGuid(), Guid.NewGuid(), "5", 2, 30, "no notes", "https://upload.wikimedia.org/wikipedia/commons/1/15/Cat_August_2010-4.jpg")
     ];
 
     /// <summary>An example medication.</summary>

@@ -44,7 +44,7 @@
             </StackPanel>
         </Border>
     </Design.PreviewWith>
-    
+
     <Style Selector=":is(TextBlock)">
         <Setter Property="FontSize" Value="14" />
 

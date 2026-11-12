@@ -98,7 +98,6 @@ public class PrescriptionDatabaseService : IHostedService, IPrescriptionDatabase
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-
     public Task StopAsync(CancellationToken cancellationToken)
     {
         return Task.CompletedTask;

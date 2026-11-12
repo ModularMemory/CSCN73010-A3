@@ -64,6 +64,7 @@ public class JsonTests : IDisposable
         // Assert
         Assert.Null(result);
     }
+
     [Fact]
     public async Task SaveAccount_CreatesFile()
     {
@@ -96,6 +97,7 @@ public class JsonTests : IDisposable
         // Cleanup
         File.Delete(filePath);
     }
+
     [Fact]
     public async Task SavePrescription_FormatsJsonWithIndentation()
     {

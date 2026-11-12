@@ -5,7 +5,6 @@ using Drugly.Server.Services.Interfaces;
 
 namespace Drugly.Server.Services;
 
-
 public class MedicationDatabaseService : IHostedService, IMedicationDatabaseService
 {
     private readonly ILogger<MedicationDatabaseService> _logger;
@@ -14,7 +13,7 @@ public class MedicationDatabaseService : IHostedService, IMedicationDatabaseServ
 
     public MedicationDatabaseService(
         ILogger<MedicationDatabaseService> logger
-        )
+    )
     {
         _logger = logger;
     }

@@ -13,7 +13,7 @@ public class ImageDatabaseService : IImageDatabaseService
 
         if (!File.Exists(path))
         {
-           throw new ImageNotFoundException();
+            throw new ImageNotFoundException();
         }
 
 

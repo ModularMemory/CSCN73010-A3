@@ -145,7 +145,7 @@ public class PrescriptionController : DruglyController
         AccountCredentials prescribedUser;
         try
         {
-             prescribedUser = await _accountDatabaseService.GetAccountById(prescription.PatientId);
+            prescribedUser = await _accountDatabaseService.GetAccountById(prescription.PatientId);
         }
         catch (AccountNotFoundException ex)
         {
@@ -157,11 +157,13 @@ public class PrescriptionController : DruglyController
             _logger.LogError(ex, "failed to fetch account {id}", prescription.PatientId);
             return InternalServerError(ApiResponse.Error("Internal server error"));
         }
+
         if (prescribedUser.AccountDetails.AccountType is not AccountType.Patient)
         {
             _logger.LogError("Cannot prescribe to a non-patient account");
             return BadRequest(ApiResponse.Error("Cannot prescribe to a non-patient account"));
         }
+
         try
         {
             await _prescriptionDatabaseService.SetPrescriptionById(prescriptionId, prescription);
@@ -171,6 +173,7 @@ public class PrescriptionController : DruglyController
             _logger.LogError(ex, "Failed to set new prescription {id}", prescriptionId);
             return InternalServerError(ApiResponse.Error("Internal server error"));
         }
+
         response.Data = prescription;
         _logger.LogInformation("New Prescription {id} Set", prescriptionId);
         return Ok(response);

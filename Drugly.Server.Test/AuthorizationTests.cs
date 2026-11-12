@@ -8,7 +8,6 @@ using NSubstitute;
 
 namespace Drugly.Server.Test;
 
-
 public class AuthorizationTests
 {
     private IAuthorizationService CreateAuthService(TimeProvider tp) => new AuthorizationService(tp);
@@ -42,7 +41,7 @@ public class AuthorizationTests
         var mockHeader = Substitute.For<IHeaderDictionary>();
         var arg = new StringValues("Bearer " + session.SessionToken);
         mockHeader.TryGetValue("Authorization", out Arg.Any<StringValues>())
-            .Returns(x=>
+            .Returns(x =>
             {
                 x[1] = arg;
                 return true;
@@ -65,7 +64,7 @@ public class AuthorizationTests
         var mockHeader = Substitute.For<IHeaderDictionary>();
         var arg = new StringValues("Bearer " + session.SessionToken);
         mockHeader.TryGetValue("Authorization", out Arg.Any<StringValues>())
-            .Returns(x=>
+            .Returns(x =>
             {
                 x[1] = arg;
                 return true;
@@ -89,7 +88,7 @@ public class AuthorizationTests
         var mockHeader = Substitute.For<IHeaderDictionary>();
         var arg = new StringValues("Bearer " + session.SessionToken);
         mockHeader.TryGetValue("BadHeader", out Arg.Any<StringValues>())
-            .Returns(x=>
+            .Returns(x =>
             {
                 x[1] = arg;
                 return true;
@@ -100,7 +99,6 @@ public class AuthorizationTests
 
         //assert
         Assert.False(result);
-
     }
 
     [Fact]
@@ -111,7 +109,7 @@ public class AuthorizationTests
         var mockHeader = Substitute.For<IHeaderDictionary>();
         var arg = new StringValues("Bearer ");
         mockHeader.TryGetValue("Authorization", out Arg.Any<StringValues>())
-            .Returns(x=>
+            .Returns(x =>
             {
                 x[1] = arg;
                 return true;
@@ -134,7 +132,7 @@ public class AuthorizationTests
         var mockHeader = Substitute.For<IHeaderDictionary>();
         var arg = new StringValues("Bearer " + session.SessionToken);
         mockHeader.TryGetValue("Authorization", out Arg.Any<StringValues>())
-            .Returns(x=>
+            .Returns(x =>
             {
                 x[1] = arg;
                 return true;
@@ -159,7 +157,7 @@ public class AuthorizationTests
         var mockHeader = Substitute.For<IHeaderDictionary>();
         var arg = new StringValues("Bearer " + session.SessionToken);
         mockHeader.TryGetValue("Authorization", out Arg.Any<StringValues>())
-            .Returns(x=>
+            .Returns(x =>
             {
                 x[1] = arg;
                 return true;
@@ -182,7 +180,7 @@ public class AuthorizationTests
         var mockHeader = Substitute.For<IHeaderDictionary>();
         var arg = new StringValues("Bearer " + session.SessionToken);
         mockHeader.TryGetValue("Authorization", out Arg.Any<StringValues>())
-            .Returns(x=>
+            .Returns(x =>
             {
                 x[1] = arg;
                 return true;
@@ -207,7 +205,7 @@ public class AuthorizationTests
         var mockHeader = Substitute.For<IHeaderDictionary>();
         var arg = new StringValues("Bearer " + session.SessionToken);
         mockHeader.TryGetValue("Authorization", out Arg.Any<StringValues>())
-            .Returns(x=>
+            .Returns(x =>
             {
                 x[1] = arg;
                 return true;
@@ -215,15 +213,15 @@ public class AuthorizationTests
         var mockHeaderDoctor = Substitute.For<IHeaderDictionary>();
         var argDoctor = new StringValues("Bearer " + sessionDoctor.SessionToken);
         mockHeaderDoctor.TryGetValue("Authorization", out Arg.Any<StringValues>())
-            .Returns(x=>
+            .Returns(x =>
             {
                 x[1] = argDoctor;
                 return true;
             });
 
         //Act
-        bool result = authorizationService.IsUserAuthorized(mockHeader, [AccountType.Patient,  AccountType.Doctor]);
-        bool result2 = authorizationService.IsUserAuthorized(mockHeaderDoctor, [AccountType.Patient,  AccountType.Doctor]);
+        bool result = authorizationService.IsUserAuthorized(mockHeader, [AccountType.Patient, AccountType.Doctor]);
+        bool result2 = authorizationService.IsUserAuthorized(mockHeaderDoctor, [AccountType.Patient, AccountType.Doctor]);
 
         //Assert
         Assert.True(result);
@@ -240,7 +238,7 @@ public class AuthorizationTests
         var mockHeader = Substitute.For<IHeaderDictionary>();
         var arg = new StringValues("Bearer " + session.SessionToken);
         mockHeader.TryGetValue("bad header", out Arg.Any<StringValues>())
-            .Returns(x=>
+            .Returns(x =>
             {
                 x[1] = arg;
                 return true;
@@ -262,7 +260,7 @@ public class AuthorizationTests
         var mockHeader = Substitute.For<IHeaderDictionary>();
         var arg = new StringValues("Bearer ");
         mockHeader.TryGetValue("Authorization", out Arg.Any<StringValues>())
-            .Returns(x=>
+            .Returns(x =>
             {
                 x[1] = arg;
                 return true;
@@ -286,7 +284,7 @@ public class AuthorizationTests
         var mockHeader = Substitute.For<IHeaderDictionary>();
         var arg = new StringValues("Bearer " + session.SessionToken);
         mockHeader.TryGetValue("Authorization", out Arg.Any<StringValues>())
-            .Returns(x=>
+            .Returns(x =>
             {
                 x[1] = arg;
                 return true;
@@ -310,7 +308,7 @@ public class AuthorizationTests
         var mockHeader = Substitute.For<IHeaderDictionary>();
         var arg = new StringValues("Bearer " + session.SessionToken);
         mockHeader.TryGetValue("Authorization", out Arg.Any<StringValues>())
-            .Returns(x=>
+            .Returns(x =>
             {
                 x[1] = arg;
                 return true;

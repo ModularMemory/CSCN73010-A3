@@ -39,6 +39,7 @@ public class AuthorizationService : IAuthorizationService
         {
             return false;
         }
+
         var token = values.FirstOrDefault();
 
         if (token is null)
@@ -66,6 +67,7 @@ public class AuthorizationService : IAuthorizationService
         {
             return false;
         }
+
         var token = values.FirstOrDefault();
 
         if (token is null)
@@ -78,7 +80,7 @@ public class AuthorizationService : IAuthorizationService
         {
             token = token[BEARER.Length..];
         }
-        
+
         if (!Authorizations.TryGetValue(token, out var accountSession))
         {
             return false;

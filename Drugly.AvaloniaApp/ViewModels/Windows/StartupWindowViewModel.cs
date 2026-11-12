@@ -15,9 +15,25 @@ namespace Drugly.AvaloniaApp.ViewModels.Windows;
 /// <summary>VM for the window shown at startup. Includes logic for initiating logins.</summary>
 public partial class StartupWindowViewModel : ViewModelBase
 {
-    private readonly ILoginService _loginService;
-    private readonly IFontSizeService _fontSizeService;
     private readonly ISukiDialogManager _dialogManager;
+    private readonly IFontSizeService _fontSizeService;
+    private readonly ILoginService _loginService;
+
+    public StartupWindowViewModel(
+        ILoginService loginService,
+        IFontSizeService fontSizeService,
+        SettingsViewModel settingsViewModel,
+        ISukiDialogManager dialogManager
+    )
+    {
+        SettingsViewModel = settingsViewModel;
+        _loginService = loginService;
+        _fontSizeService = fontSizeService;
+        _dialogManager = dialogManager;
+        _loginService.LoginError += LoginService_OnLoginError;
+
+        ValidateAllProperties();
+    }
 
     /// <summary>The title of the window.</summary>
     public string Title { get; } = $"{nameof(Drugly)} Login";
@@ -40,23 +56,7 @@ public partial class StartupWindowViewModel : ViewModelBase
     [ObservableProperty]
     public partial ViewModelBase SettingsViewModel { get; set; }
 
-    public StartupWindowViewModel(
-        ILoginService loginService,
-        IFontSizeService fontSizeService,
-        SettingsViewModel settingsViewModel,
-        ISukiDialogManager dialogManager
-    )
-    {
-        SettingsViewModel = settingsViewModel;
-        _loginService = loginService;
-        _fontSizeService = fontSizeService;
-        _dialogManager = dialogManager;
-        _loginService.LoginError += LoginService_OnLoginError;
-
-        ValidateAllProperties();
-    }
-
-    /// <summary>Initiates a login via the <see cref="_loginService"/>.</summary>
+    /// <summary>Initiates a login via the <see cref="_loginService" />.</summary>
     [RelayCommand]
     private async Task Login()
     {
@@ -88,7 +88,10 @@ public partial class StartupWindowViewModel : ViewModelBase
     /// <summary>Invoked when the login service reports a failed login.</summary>
     /// <param name="sender">The sender.</param>
     /// <param name="e">The login error message.</param>
-    private void LoginService_OnLoginError(object? sender, string e) => ShowLoginError(e);
+    private void LoginService_OnLoginError(object? sender, string e)
+    {
+        ShowLoginError(e);
+    }
 
     private void ShowLoginError(string e)
     {
@@ -97,7 +100,7 @@ public partial class StartupWindowViewModel : ViewModelBase
             .WithTitle("Login Error")
             .WithGroupedContent(new TextBlock
             {
-                Text = e
+                Text = e,
             })
             .WithOkResult("Ok")
             .Dismiss().ByClickingBackground()

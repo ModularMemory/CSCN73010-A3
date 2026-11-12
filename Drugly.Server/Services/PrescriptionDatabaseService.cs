@@ -7,9 +7,9 @@ namespace Drugly.Server.Services;
 
 public class PrescriptionDatabaseService : IHostedService, IPrescriptionDatabaseService
 {
+    private const string FOLDER_PATH = "Prescriptions";
     private readonly ILogger<PrescriptionDatabaseService> _logger;
     private readonly Dictionary<Guid, Prescription> _prescriptions = new();
-    private const string FOLDER_PATH = "Prescriptions";
 
     public PrescriptionDatabaseService(
         ILogger<PrescriptionDatabaseService> logger
@@ -19,57 +19,7 @@ public class PrescriptionDatabaseService : IHostedService, IPrescriptionDatabase
     }
 
     /// <summary>
-    /// searches for prescription by id
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
-    /// <exception cref="PrescriptionNotFoundException"></exception>
-    public Task<Prescription> GetPrescriptionById(Guid id)
-    {
-        if (!_prescriptions.TryGetValue(id, out var prescription))
-        {
-            throw new PrescriptionNotFoundException();
-        }
-
-        return Task.FromResult(prescription);
-    }
-
-    /// <summary>
-    /// sets prescription by id
-    /// </summary>
-    /// <param name="id"></param>
-    /// <param name="prescription"></param>
-    /// <returns></returns>
-    public async Task SetPrescriptionById(Guid id, Prescription prescription)
-    {
-        _prescriptions[id] = prescription;
-
-        var filePath = Path.Combine(FOLDER_PATH, $"{id}.json");
-
-        await JsonWritePrescription.SavePrescription(prescription, filePath);
-    }
-
-    /// <summary>
-    /// gets all prescriptions assigned to account id
-    /// </summary>
-    /// <param name="accountId"></param>
-    /// <returns></returns>
-    /// <exception cref="PrescriptionNotFoundException"></exception>
-    public Task<List<Prescription>> GetAllPrescriptionsByAccountId(Guid accountId)
-    {
-        var result = _prescriptions.Values
-            .Where(p => p.PatientId == accountId)
-            .ToList();
-        if (result.Count == 0)
-        {
-            throw new PrescriptionNotFoundException();
-        }
-
-        return Task.FromResult(result);
-    }
-
-    /// <summary>
-    /// loads prescription data from the disk
+    ///     loads prescription data from the disk
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
@@ -94,12 +44,62 @@ public class PrescriptionDatabaseService : IHostedService, IPrescriptionDatabase
     }
 
     /// <summary>
-    /// stops async
+    ///     stops async
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public Task StopAsync(CancellationToken cancellationToken)
     {
         return Task.CompletedTask;
+    }
+
+    /// <summary>
+    ///     searches for prescription by id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <exception cref="PrescriptionNotFoundException"></exception>
+    public Task<Prescription> GetPrescriptionById(Guid id)
+    {
+        if (!_prescriptions.TryGetValue(id, out var prescription))
+        {
+            throw new PrescriptionNotFoundException();
+        }
+
+        return Task.FromResult(prescription);
+    }
+
+    /// <summary>
+    ///     sets prescription by id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="prescription"></param>
+    /// <returns></returns>
+    public async Task SetPrescriptionById(Guid id, Prescription prescription)
+    {
+        _prescriptions[id] = prescription;
+
+        var filePath = Path.Combine(FOLDER_PATH, $"{id}.json");
+
+        await JsonWritePrescription.SavePrescription(prescription, filePath);
+    }
+
+    /// <summary>
+    ///     gets all prescriptions assigned to account id
+    /// </summary>
+    /// <param name="accountId"></param>
+    /// <returns></returns>
+    /// <exception cref="PrescriptionNotFoundException"></exception>
+    public Task<List<Prescription>> GetAllPrescriptionsByAccountId(Guid accountId)
+    {
+        var result = _prescriptions.Values
+            .Where(p => p.PatientId == accountId)
+            .ToList();
+        if (result.Count == 0)
+        {
+            throw new PrescriptionNotFoundException();
+        }
+
+        return Task.FromResult(result);
     }
 }

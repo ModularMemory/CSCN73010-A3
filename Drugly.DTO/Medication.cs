@@ -19,22 +19,22 @@ public class Medication
     }
 
     /// <summary>
-    /// The ID of the medication
+    ///     The ID of the medication
     /// </summary>
     public required Guid Id { get; set; }
 
     /// <summary>
-    /// The name of the medication
+    ///     The name of the medication
     /// </summary>
     public required string Name { get; set; }
 
     /// <summary>
-    /// The description of the medication
+    ///     The description of the medication
     /// </summary>
     public required string Description { get; set; }
 
     /// <summary>
-    /// The Uri for the image of the medication
+    ///     The Uri for the image of the medication
     /// </summary>
     public required string ImageUri { get; set; }
 }

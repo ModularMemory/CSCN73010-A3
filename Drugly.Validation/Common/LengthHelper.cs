@@ -7,8 +7,8 @@ namespace Drugly.Validation.Common;
 /// <summary>Provides object length helper functions.</summary>
 internal static class LengthHelper
 {
-    /// <summary>Tries to get the length from an <see cref="object"/> of unknown type.</summary>
-    /// <returns><see langword="true"/> if a length could be found, otherwise <see langword="false"/>.</returns>
+    /// <summary>Tries to get the length from an <see cref="object" /> of unknown type.</summary>
+    /// <returns><see langword="true" /> if a length could be found, otherwise <see langword="false" />.</returns>
     [RequiresUnreferencedCode("Uses reflection to get Count/Length properties for objects that are not strings and do not implement ICollection")]
     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
     public static bool TryGetLength(object? value, out int length)

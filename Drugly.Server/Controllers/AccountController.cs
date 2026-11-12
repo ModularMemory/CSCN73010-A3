@@ -9,11 +9,11 @@ namespace Drugly.Server.Controllers;
 /// <summary>Controller class to handle HTTP requests relating to account management</summary>
 public class AccountController : DruglyController
 {
-    /// <summary>The database service object</summary>
-    private readonly IAccountDatabaseService _databaseService;
-
     /// <summary>The authorization service object</summary>
     private readonly IAuthorizationService _authorizationService;
+
+    /// <summary>The database service object</summary>
+    private readonly IAccountDatabaseService _databaseService;
 
     /// <summary>The logger object</summary>
     private readonly ILogger<AccountController> _logger;
@@ -45,12 +45,12 @@ public class AccountController : DruglyController
             return Forbid(ApiResponse.Error("User is not authorized"));
         }
 
-        ApiResponse<AccountDetails> response = new ApiResponse<AccountDetails>();
+        var response = new ApiResponse<AccountDetails>();
         Response.Headers.ContentType = "application/json";
 
         try
         {
-            AccountCredentials entry = await _databaseService.GetAccountById(id);
+            var entry = await _databaseService.GetAccountById(id);
             response.Data = entry.AccountDetails;
         }
         catch (AccountNotFoundException ex)
@@ -82,7 +82,7 @@ public class AccountController : DruglyController
             return Forbid(ApiResponse.Error("User is not authorized"));
         }
 
-        ApiResponse<Guid> response = new ApiResponse<Guid>();
+        var response = new ApiResponse<Guid>();
         Response.Headers.ContentType = "application/json";
 
         try
@@ -132,7 +132,7 @@ public class AccountController : DruglyController
     [HttpPost]
     public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
     {
-        ApiResponse<AccountSession> response = new ApiResponse<AccountSession>();
+        var response = new ApiResponse<AccountSession>();
         Response.Headers.ContentType = "application/json";
         Guid id;
         AccountCredentials entry;
@@ -213,7 +213,7 @@ public class AccountController : DruglyController
             return Forbid(ApiResponse.Error("User is not authorized"));
         }
 
-        ApiResponse<AccountDetails[]> response = new ApiResponse<AccountDetails[]>();
+        var response = new ApiResponse<AccountDetails[]>();
         Response.Headers.ContentType = "application/json";
 
         try

@@ -15,14 +15,6 @@ public partial class MainViewModel : ViewModelBase
 {
     private readonly ILogger _logger;
 
-    public IPageRouter PageRouter { get; }
-
-    [ObservableProperty]
-    public partial ViewModelBase? ContentViewModel { get; set; }
-
-    [ObservableProperty]
-    public partial ViewModelBase SettingsViewModel { get; set; }
-
     public MainViewModel(
         IServiceProvider serviceProvider,
         IPageRouter pageRouter,
@@ -43,7 +35,7 @@ public partial class MainViewModel : ViewModelBase
         {
             AccountType.Patient => serviceProvider.GetRequiredService<PatientMainViewModel>(),
             AccountType.Doctor => serviceProvider.GetRequiredService<DoctorMainViewModel>(),
-            _ => null
+            _ => null,
         };
 
         if (vm is null)
@@ -53,6 +45,14 @@ public partial class MainViewModel : ViewModelBase
 
         PageRouter.RootPage = vm;
     }
+
+    public IPageRouter PageRouter { get; }
+
+    [ObservableProperty]
+    public partial ViewModelBase? ContentViewModel { get; set; }
+
+    [ObservableProperty]
+    public partial ViewModelBase SettingsViewModel { get; set; }
 
     /// <summary>Invoked when a page navigation is requested.</summary>
     /// <param name="sender">The sender.</param>

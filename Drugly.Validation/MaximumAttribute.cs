@@ -6,9 +6,6 @@ namespace Drugly.Validation;
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter)]
 public class MaximumAttribute : ValidationAttribute
 {
-    /// <summary>The inclusive maximum value.</summary>
-    public decimal Max { get; }
-
     public MaximumAttribute(long max)
     {
         Max = max;
@@ -18,6 +15,9 @@ public class MaximumAttribute : ValidationAttribute
     {
         Max = (decimal)max;
     }
+
+    /// <summary>The inclusive maximum value.</summary>
+    public decimal Max { get; }
 
     public override bool IsValid(object? value)
     {

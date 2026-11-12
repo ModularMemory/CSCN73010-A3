@@ -12,8 +12,8 @@ namespace Drugly.AvaloniaApp;
 /// <summary>Given a view model, returns the corresponding view if possible.</summary>
 public sealed class ViewLocator : IDataTemplate
 {
-    private readonly IViewFactory _viewFactory;
     private readonly ILogger _logger;
+    private readonly IViewFactory _viewFactory;
 
     public ViewLocator(
         IViewFactory viewFactory,
@@ -46,14 +46,14 @@ public sealed class ViewLocator : IDataTemplate
             {
                 Header = new TextBlock
                 {
-                    Text = $"View Not Found For {type.FullName}"
+                    Text = $"View Not Found For {type.FullName}",
                 },
                 Content = new TextBlock
                 {
                     Text = ex.ToString(),
                     FontSize = 12,
-                    Foreground = Brushes.Red
-                }
+                    Foreground = Brushes.Red,
+                },
             };
         }
     }

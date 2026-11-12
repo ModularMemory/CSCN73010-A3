@@ -7,10 +7,10 @@ namespace Drugly.Server.Services;
 
 public class AccountDatabaseService : IHostedService, IAccountDatabaseService
 {
-    private readonly ILogger<AccountDatabaseService> _logger;
+    private const string FOLDER_PATH = "Accounts";
     private readonly Dictionary<Guid, AccountCredentials> _accounts = new();
     private readonly Dictionary<string, Guid> _emailToId = new(StringComparer.OrdinalIgnoreCase);
-    private const string FOLDER_PATH = "Accounts";
+    private readonly ILogger<AccountDatabaseService> _logger;
 
     public AccountDatabaseService(
         ILogger<AccountDatabaseService> logger
@@ -20,7 +20,7 @@ public class AccountDatabaseService : IHostedService, IAccountDatabaseService
     }
 
     /// <summary>
-    /// grabs account from file by id
+    ///     grabs account from file by id
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
@@ -36,7 +36,7 @@ public class AccountDatabaseService : IHostedService, IAccountDatabaseService
     }
 
     /// <summary>
-    /// sets account by id
+    ///     sets account by id
     /// </summary>
     /// <param name="id"></param>
     /// <param name="email"></param>
@@ -53,7 +53,7 @@ public class AccountDatabaseService : IHostedService, IAccountDatabaseService
     }
 
     /// <summary>
-    /// get email id by searching email
+    ///     get email id by searching email
     /// </summary>
     /// <param name="email"></param>
     /// <returns></returns>
@@ -69,7 +69,7 @@ public class AccountDatabaseService : IHostedService, IAccountDatabaseService
     }
 
     /// <summary>
-    /// gets all patient accounts
+    ///     gets all patient accounts
     /// </summary>
     /// <returns></returns>
     /// <exception cref="AccountNotFoundException"></exception>
@@ -89,7 +89,7 @@ public class AccountDatabaseService : IHostedService, IAccountDatabaseService
     }
 
     /// <summary>
-    /// loads initial account details from the disc
+    ///     loads initial account details from the disc
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
@@ -120,7 +120,7 @@ public class AccountDatabaseService : IHostedService, IAccountDatabaseService
     }
 
     /// <summary>
-    /// stops async
+    ///     stops async
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>

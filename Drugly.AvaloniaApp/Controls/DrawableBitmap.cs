@@ -11,81 +11,27 @@ using CommunityToolkit.Mvvm.Input;
 namespace Drugly.AvaloniaApp.Controls;
 
 /// <summary>
-/// A <see cref="Control"/> which displays a mouse-interactive <see cref="Bitmap"/>.
+///     A <see cref="Control" /> which displays a mouse-interactive <see cref="Bitmap" />.
 /// </summary>
 public sealed partial class DrawableBitmap : Control
 {
     /// <summary>
-    /// Defines the <see cref="Background"/> property.
+    ///     Defines the <see cref="Background" /> property.
     /// </summary>
     public static readonly StyledProperty<IBrush?> BackgroundProperty =
         Border.BackgroundProperty.AddOwner<DrawableBitmap>();
 
     /// <summary>
-    /// Gets or Sets Bitmap background brush.
-    /// </summary>
-    public IBrush? Background
-    {
-        get => GetValue(BackgroundProperty);
-        set => SetValue(BackgroundProperty, value);
-    }
-
-    /// <summary>
-    /// Defines the <see cref="Foreground"/> property.
+    ///     Defines the <see cref="Foreground" /> property.
     /// </summary>
     public static readonly StyledProperty<IBrush?> ForegroundProperty =
         TextElement.ForegroundProperty.AddOwner<DrawableBitmap>();
 
     /// <summary>
-    /// Gets or Sets Bitmap background brush.
-    /// </summary>
-    public IBrush? Foreground
-    {
-        get => GetValue(ForegroundProperty);
-        set => SetValue(ForegroundProperty, value);
-    }
-
-    /// <summary>
-    /// Defines the <see cref="Foreground"/> property.
+    ///     Defines the <see cref="Foreground" /> property.
     /// </summary>
     public static readonly StyledProperty<double> StrokeThicknessProperty =
         Shape.StrokeThicknessProperty.AddOwner<DrawableBitmap>();
-
-    /// <summary>
-    /// Gets or Sets Bitmap background brush.
-    /// </summary>
-    public double StrokeThickness
-    {
-        get => GetValue(StrokeThicknessProperty);
-        set => SetValue(StrokeThicknessProperty, value);
-    }
-
-    /// <summary>
-    /// Completely resets the bitmap to the original colour.
-    /// </summary>
-    [RelayCommand]
-    private void Clear()
-    {
-        InitBitmap();
-        _points.Clear();
-        InvalidateVisual();
-    }
-
-    /// <summary>
-    /// Saves the bitmap to a given<see cref="Stream"/>. See <see cref="Bitmap.Save(Stream, int?)"/>.
-    /// </summary>
-    /// <param name="stream">The stream to save to.</param>
-    /// <returns><see langword="true"/> if the bitmap could be saved, otherwise <see langword="false"/>.</returns>
-    public bool Save(Stream stream)
-    {
-        if (_bitmap is null)
-        {
-            return false;
-        }
-
-        _bitmap.Save(stream);
-        return true;
-    }
 
     // ---------------- //
 
@@ -98,6 +44,60 @@ public sealed partial class DrawableBitmap : Control
         PointerPressed += OnPointerPressed;
         PointerMoved += OnPointerMoved;
         PointerReleased += OnPointerReleased;
+    }
+
+    /// <summary>
+    ///     Gets or Sets Bitmap background brush.
+    /// </summary>
+    public IBrush? Background
+    {
+        get => GetValue(BackgroundProperty);
+        set => SetValue(BackgroundProperty, value);
+    }
+
+    /// <summary>
+    ///     Gets or Sets Bitmap background brush.
+    /// </summary>
+    public IBrush? Foreground
+    {
+        get => GetValue(ForegroundProperty);
+        set => SetValue(ForegroundProperty, value);
+    }
+
+    /// <summary>
+    ///     Gets or Sets Bitmap background brush.
+    /// </summary>
+    public double StrokeThickness
+    {
+        get => GetValue(StrokeThicknessProperty);
+        set => SetValue(StrokeThicknessProperty, value);
+    }
+
+    /// <summary>
+    ///     Completely resets the bitmap to the original colour.
+    /// </summary>
+    [RelayCommand]
+    private void Clear()
+    {
+        InitBitmap();
+        _points.Clear();
+        InvalidateVisual();
+    }
+
+    /// <summary>
+    ///     Saves the bitmap to a given<see cref="Stream" />. See <see cref="Bitmap.Save(Stream, int?)" />.
+    /// </summary>
+    /// <param name="stream">The stream to save to.</param>
+    /// <returns><see langword="true" /> if the bitmap could be saved, otherwise <see langword="false" />.</returns>
+    public bool Save(Stream stream)
+    {
+        if (_bitmap is null)
+        {
+            return false;
+        }
+
+        _bitmap.Save(stream);
+        return true;
     }
 
     private void OnPointerPressed(object? sender, PointerPressedEventArgs e)
@@ -190,7 +190,7 @@ public sealed partial class DrawableBitmap : Control
             }
 
             using var ctx = bitmap.CreateDrawingContext(false);
-            var pen = new Pen(Foreground ?? Brushes.Black, thickness: StrokeThickness);
+            var pen = new Pen(Foreground ?? Brushes.Black, StrokeThickness);
 
             for (var i = 1; i < _points.Count; i++)
             {

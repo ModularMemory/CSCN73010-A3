@@ -27,22 +27,8 @@ public sealed partial class PageRouter : ObservableObject, IPageRouter
     [ObservableProperty]
     public partial ViewModelBase? RootPage { get; set; }
 
-    partial void OnRootPageChanged(ViewModelBase? value)
-    {
-        if (_viewModels.Count == 0)
-        {
-            OnPageNavigate(value);
-        }
-    }
-
     [ObservableProperty]
     public partial bool HistoryEmpty { get; private set; }
-
-    private void OnPageNavigate(ViewModelBase? e)
-    {
-        _logger.Information("Navigating to page {VmName}", e?.GetType().Name ?? "null");
-        PageNavigate?.Invoke(this, e);
-    }
 
     public void ResetPageHistory()
     {
@@ -84,5 +70,19 @@ public sealed partial class PageRouter : ObservableObject, IPageRouter
 
         OnPageNavigate(null);
         OnPageNavigate(currentPage);
+    }
+
+    partial void OnRootPageChanged(ViewModelBase? value)
+    {
+        if (_viewModels.Count == 0)
+        {
+            OnPageNavigate(value);
+        }
+    }
+
+    private void OnPageNavigate(ViewModelBase? e)
+    {
+        _logger.Information("Navigating to page {VmName}", e?.GetType().Name ?? "null");
+        PageNavigate?.Invoke(this, e);
     }
 }

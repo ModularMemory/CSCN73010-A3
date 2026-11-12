@@ -32,14 +32,14 @@ using SukiUI.Toasts;
 
 namespace Drugly.AvaloniaApp;
 
-/// <summary>Provides <see cref="IServiceProvider"/> extensions for initializing <see cref="Drugly"/>.</summary>
+/// <summary>Provides <see cref="IServiceProvider" /> extensions for initializing <see cref="Drugly" />.</summary>
 public static class Startup
 {
     extension(IServiceCollection serviceCollection)
     {
-        /// <summary>Registers and configures the services required by <see cref="Drugly"/> in the given <see cref="IServiceCollection"/>.</summary>
+        /// <summary>Registers and configures the services required by <see cref="Drugly" /> in the given <see cref="IServiceCollection" />.</summary>
         /// <param name="application">The current application instance.</param>
-        /// <returns>The <see cref="IServiceCollection"/>.</returns>
+        /// <returns>The <see cref="IServiceCollection" />.</returns>
         public IServiceCollection ConfigureServices(Application application)
         {
             serviceCollection.AddSingleton<Application>(application);
@@ -67,7 +67,7 @@ public static class Startup
                 // Config
                 .AddSingleton<IConfigurationRoot>(new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                    .AddJsonFile("appsettings.json", false, true)
                     .Build())
                 .AddSingleton<HttpConfig>()
                 // Logging
@@ -96,14 +96,14 @@ public static class Startup
                 .AddSingleton<ISukiDialogManager, SukiDialogManager>()
                 .AddTransient<SukiDialogHost>(provider => new SukiDialogHost
                 {
-                    Manager = provider.GetRequiredService<ISukiDialogManager>()
+                    Manager = provider.GetRequiredService<ISukiDialogManager>(),
                 });
 
             return serviceCollection;
         }
 
-        /// <summary>Registers and configures the views and view models required by <see cref="Drugly"/> in the given <see cref="IServiceCollection"/>.</summary>
-        /// <returns>The <see cref="IServiceCollection"/>.</returns>
+        /// <summary>Registers and configures the views and view models required by <see cref="Drugly" /> in the given <see cref="IServiceCollection" />.</summary>
+        /// <returns>The <see cref="IServiceCollection" />.</returns>
         public IServiceCollection ConfigureViews()
         {
             var builder = new ViewFactoryBuilder(serviceCollection)
@@ -147,7 +147,7 @@ public static class Startup
 #if DEBUG
             return new HttpClientHandler
             {
-                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
             };
 #else
             return new HttpClientHandler();
@@ -161,7 +161,7 @@ public static class Startup
                 {
                     BackoffType = DelayBackoffType.Exponential,
                     UseJitter = true,
-                    MaxRetryAttempts = 3
+                    MaxRetryAttempts = 3,
                 })
                 .AddTimeout(TimeSpan.FromSeconds(10));
         }

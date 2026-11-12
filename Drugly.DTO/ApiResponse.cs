@@ -11,15 +11,18 @@ public class ApiResponse<T>
     public T? Data { get; set; }
 }
 
-/// <summary>Helpful static methods related to <see cref="ApiResponse{T}"/>.</summary>
+/// <summary>Helpful static methods related to <see cref="ApiResponse{T}" />.</summary>
 public static class ApiResponse
 {
-    /// <summary>Creates a <see cref="ApiResponse{T}"/> with an error message and no data.</summary>
+    /// <summary>Creates a <see cref="ApiResponse{T}" /> with an error message and no data.</summary>
     /// <param name="message">The error message to use.</param>
     /// <returns>The created error object.</returns>
-    public static ApiResponse<object?> Error(string message) => new()
+    public static ApiResponse<object?> Error(string message)
     {
-        ErrorMessage = message,
-        Data = null
-    };
+        return new ApiResponse<object?>
+        {
+            ErrorMessage = message,
+            Data = null,
+        };
+    }
 }

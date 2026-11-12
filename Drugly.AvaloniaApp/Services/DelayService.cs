@@ -4,5 +4,8 @@ namespace Drugly.AvaloniaApp.Services;
 public static class DelayService
 {
     /// <summary>Fake delay feels a lot better than instant feedback when performing local validation.</summary>
-    public static Task FakeDelay(int millis = 200) => Task.Delay(millis);
+    public static Task FakeDelay(int millis = 200)
+    {
+        return Task.Delay(millis);
+    }
 }

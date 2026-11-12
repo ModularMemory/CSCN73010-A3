@@ -6,7 +6,7 @@ using Serilog.Core;
 
 namespace Drugly.AvaloniaApp.Tests.ServiceTests;
 
-/// <summary>Tests for <see cref="PageRouter"/>.</summary>
+/// <summary>Tests for <see cref="PageRouter" />.</summary>
 public class PageRouterTests
 {
     private static IPageRouter PageRouterFactory => new PageRouter(Logger.None);

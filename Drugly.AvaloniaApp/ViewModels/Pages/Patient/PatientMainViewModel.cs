@@ -11,18 +11,12 @@ namespace Drugly.AvaloniaApp.ViewModels.Pages.Patient;
 /// <summary>Vm for the main page for patients.</summary>
 public partial class PatientMainViewModel : ViewModelBase, IPageViewModel
 {
-    private readonly IPageRouter _pageRouter;
-    private readonly IServiceProvider _serviceProvider;
     private readonly IAccountDetailsService _accountDetailsService;
     private readonly IAccountSessionService _accountSessionService;
-    private readonly IPrescriptionDetailsService _prescriptionDetailsService;
     private readonly IMedicationDetailsService _medicationDetailsService;
-
-    public string? PageTitle => "Hello, John!";
-
-    public AccountDetails? Account { get; set; }
-
-    public AvaloniaList<PatientPrescription> Prescriptions { get; } = [];
+    private readonly IPageRouter _pageRouter;
+    private readonly IPrescriptionDetailsService _prescriptionDetailsService;
+    private readonly IServiceProvider _serviceProvider;
 
     public PatientMainViewModel(
         IPageRouter pageRouter,
@@ -42,6 +36,12 @@ public partial class PatientMainViewModel : ViewModelBase, IPageViewModel
 
         Dispatcher.UIThread.InvokeAsync(GetPrescriptions);
     }
+
+    public AccountDetails? Account { get; set; }
+
+    public AvaloniaList<PatientPrescription> Prescriptions { get; } = [];
+
+    public string? PageTitle => "Hello, John!";
 
     private async Task GetPrescriptions()
     {

@@ -1,6 +1,3 @@
-using Drugly.DTO;
-using Drugly.Server.Services.Interfaces;
-
 namespace Drugly.Server;
 
 public class Program

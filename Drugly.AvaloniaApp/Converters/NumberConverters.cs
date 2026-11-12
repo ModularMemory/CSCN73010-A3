@@ -6,7 +6,7 @@ using Avalonia.Data.Converters;
 namespace Drugly.AvaloniaApp.Converters;
 
 /// <summary>
-/// An assortment of double-based <see cref="IValueConverter"/>s.
+///     An assortment of double-based <see cref="IValueConverter" />s.
 /// </summary>
 internal static class NumberConverters
 {
@@ -28,6 +28,26 @@ internal static class NumberConverters
     public static readonly IValueConverter Max = new ConverterImpl<double>(Math.Max);
     public static readonly IMultiValueConverter MultiMin = new MultiConverterImpl<double>(double.MaxValue, Math.Min);
     public static readonly IMultiValueConverter MultiMax = new MultiConverterImpl<double>(double.MinValue, Math.Max);
+
+    private static bool TryCastToDouble(object? value, out double d)
+    {
+        if (value is double val || (value is string s && double.TryParse(s, out val)))
+        {
+            d = val;
+            return true;
+        }
+
+        try
+        {
+            d = Convert.ToDouble(value);
+            return true;
+        }
+        catch
+        {
+            d = 0;
+            return false;
+        }
+    }
 
     private class ConverterImpl<TResult>(
         Func<double, double, TResult> convert,
@@ -85,26 +105,6 @@ internal static class NumberConverters
             }
 
             return accumulator;
-        }
-    }
-
-    private static bool TryCastToDouble(object? value, out double d)
-    {
-        if (value is double val || (value is string s && double.TryParse(s, out val)))
-        {
-            d = val;
-            return true;
-        }
-
-        try
-        {
-            d = Convert.ToDouble(value);
-            return true;
-        }
-        catch
-        {
-            d = 0;
-            return false;
         }
     }
 }

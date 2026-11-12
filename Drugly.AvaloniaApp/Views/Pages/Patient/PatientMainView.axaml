@@ -3,7 +3,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:design="clr-namespace:Drugly.AvaloniaApp.Design"
-             xmlns:pages="clr-namespace:Drugly.AvaloniaApp.ViewModels.Pages"
              xmlns:patient="clr-namespace:Drugly.AvaloniaApp.ViewModels.Pages.Patient"
              xmlns:icons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              xmlns:suki="https://github.com/kikipoulet/SukiUI"

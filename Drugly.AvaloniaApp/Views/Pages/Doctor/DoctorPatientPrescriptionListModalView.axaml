@@ -6,7 +6,6 @@
              xmlns:design="clr-namespace:Drugly.AvaloniaApp.Design"
              xmlns:converters="clr-namespace:Drugly.AvaloniaApp.Converters"
              xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
-             xmlns:suki="https://github.com/kikipoulet/SukiUI"
              MinWidth="400" MaxWidth="1000" MinHeight="400"
              mc:Ignorable="d"
              x:Class="Drugly.AvaloniaApp.Views.Pages.Doctor.DoctorPatientPrescriptionListModalView"

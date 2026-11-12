@@ -20,10 +20,10 @@ using SukiUI.Dialogs;
 namespace Drugly.AvaloniaApp;
 
 /// <summary>The Avalonia application entry point.</summary>
-public partial class App : Application
+public class App : Application
 {
-    private IServiceProvider? _serviceProvider;
     private ILogger _logger = Logger.None;
+    private IServiceProvider? _serviceProvider;
 
     public override void Initialize()
     {
@@ -94,13 +94,13 @@ public partial class App : Application
             .WithGroupedContent(
                 new TextBlock
                 {
-                    Text = $"An uncaught exception occurred. {nameof(Drugly)} can resume but may be unstable."
+                    Text = $"An uncaught exception occurred. {nameof(Drugly)} can resume but may be unstable.",
                 },
                 new TextBlock
                 {
                     Text = e.Exception.ToString(),
                     FontSize = 12,
-                    Foreground = Brushes.Red
+                    Foreground = Brushes.Red,
                 })
             .WithColoredYesNoResult("Resume", "Exit")
             .OnClosed(res =>

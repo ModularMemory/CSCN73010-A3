@@ -5,7 +5,7 @@ using Serilog.Core;
 
 namespace Drugly.AvaloniaApp.Tests.ServiceTests;
 
-/// <summary>Tests for <see cref="AccountSessionService"/>.</summary>
+/// <summary>Tests for <see cref="AccountSessionService" />.</summary>
 public class AccountSessionServiceTests
 {
     private static IAccountSessionService AccountSessionServiceFactory => new AccountSessionService(Logger.None);

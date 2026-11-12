@@ -11,6 +11,15 @@ public sealed class FontSizeService : IFontSizeService
     private readonly Application _application;
     private readonly Style _fontStyle;
 
+    public FontSizeService(
+        Application application
+    )
+    {
+        _application = application;
+        _fontStyle = new Style(x => x.Is<TextBlock>());
+        FontSize = 14;
+    }
+
     public int FontSize
     {
         get;
@@ -36,18 +45,9 @@ public sealed class FontSizeService : IFontSizeService
             {
                 fontStyle.Add(new Style(x => x.Nesting().Class(selector))
                 {
-                    Setters = { new Setter(TextBlock.FontSizeProperty, (double)(int)fontSize) }
+                    Setters = { new Setter(TextBlock.FontSizeProperty, (double)(int)fontSize) },
                 });
             }
         }
-    }
-
-    public FontSizeService(
-        Application application
-    )
-    {
-        _application = application;
-        _fontStyle = new Style(x => x.Is<TextBlock>());
-        FontSize = 14;
     }
 }

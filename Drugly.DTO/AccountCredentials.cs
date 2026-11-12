@@ -10,12 +10,12 @@ public class AccountCredentials
     }
 
     /// <summary>
-    /// The user's credentials
+    ///     The user's credentials
     /// </summary>
     public string Password { get; set; }
 
     /// <summary>
-    /// The container class for the account's details
+    ///     The container class for the account's details
     /// </summary>
     public AccountDetails AccountDetails { get; set; }
 }

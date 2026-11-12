@@ -6,9 +6,6 @@ namespace Drugly.Validation;
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter)]
 public class MinimumAttribute : ValidationAttribute
 {
-    /// <summary>The inclusive minimum value.</summary>
-    public decimal Min { get; }
-
     public MinimumAttribute(long min)
     {
         Min = min;
@@ -18,6 +15,9 @@ public class MinimumAttribute : ValidationAttribute
     {
         Min = (decimal)min;
     }
+
+    /// <summary>The inclusive minimum value.</summary>
+    public decimal Min { get; }
 
     public override bool IsValid(object? value)
     {

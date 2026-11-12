@@ -11,9 +11,6 @@ public sealed class LoginService : ILoginService
     private readonly IAccountSessionService _accountSessionService;
     private readonly IHttpClientFactory _httpClientFactory;
     private readonly ILogger _logger;
-    public event EventHandler<AccountType>? LoginSuccessful;
-    public event EventHandler<string>? LoginError;
-    public event EventHandler? Logout;
 
     public LoginService(
         IAccountSessionService accountSessionService,
@@ -26,23 +23,9 @@ public sealed class LoginService : ILoginService
         _logger = logger;
     }
 
-    private void OnLoginSuccessful(AccountType e)
-    {
-        _logger.Information("Successfully logged in as {AccountType}", e);
-        LoginSuccessful?.Invoke(this, e);
-    }
-
-    private void OnLoginError(string e)
-    {
-        _logger.Error("Failed to log in: {ErrorMessage}", e);
-        LoginError?.Invoke(this, e);
-    }
-
-    private void OnLogout()
-    {
-        _logger.Information("Successfully logged out");
-        Logout?.Invoke(this, EventArgs.Empty);
-    }
+    public event EventHandler<AccountType>? LoginSuccessful;
+    public event EventHandler<string>? LoginError;
+    public event EventHandler? Logout;
 
     public async Task TryLoginAsync(string email, string password)
     {
@@ -56,26 +39,6 @@ public sealed class LoginService : ILoginService
         var session = response.Data;
         _accountSessionService.StoreSession(session);
         OnLoginSuccessful(session.AccountType);
-    }
-
-    private async Task<ApiResponse<AccountSession>?> GetAccountSession(string email, string password)
-    {
-        var client = _httpClientFactory.CreateClient(nameof(ILoginService));
-
-        var request = new LoginRequest
-        {
-            Email = email,
-            Password = password
-        };
-
-        using var res = await client.PostAsync("/Account/Login", JsonContent.Create(request));
-        var resBody = await res.Content.ReadFromJsonAsync<ApiResponse<AccountSession>>();
-        if (!res.IsSuccessStatusCode)
-        {
-            _logger.Error("Error while logging in: {Code} - {Message}", res.StatusCode, resBody?.ErrorMessage);
-        }
-
-        return resBody;
     }
 
     public async Task LogoutAsync()
@@ -102,5 +65,43 @@ public sealed class LoginService : ILoginService
 
         _accountSessionService.ClearSession();
         OnLogout();
+    }
+
+    private void OnLoginSuccessful(AccountType e)
+    {
+        _logger.Information("Successfully logged in as {AccountType}", e);
+        LoginSuccessful?.Invoke(this, e);
+    }
+
+    private void OnLoginError(string e)
+    {
+        _logger.Error("Failed to log in: {ErrorMessage}", e);
+        LoginError?.Invoke(this, e);
+    }
+
+    private void OnLogout()
+    {
+        _logger.Information("Successfully logged out");
+        Logout?.Invoke(this, EventArgs.Empty);
+    }
+
+    private async Task<ApiResponse<AccountSession>?> GetAccountSession(string email, string password)
+    {
+        var client = _httpClientFactory.CreateClient(nameof(ILoginService));
+
+        var request = new LoginRequest
+        {
+            Email = email,
+            Password = password,
+        };
+
+        using var res = await client.PostAsync("/Account/Login", JsonContent.Create(request));
+        var resBody = await res.Content.ReadFromJsonAsync<ApiResponse<AccountSession>>();
+        if (!res.IsSuccessStatusCode)
+        {
+            _logger.Error("Error while logging in: {Code} - {Message}", res.StatusCode, resBody?.ErrorMessage);
+        }
+
+        return resBody;
     }
 }

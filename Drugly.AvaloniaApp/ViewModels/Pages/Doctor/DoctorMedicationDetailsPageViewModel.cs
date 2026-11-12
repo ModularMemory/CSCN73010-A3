@@ -13,13 +13,8 @@ namespace Drugly.AvaloniaApp.ViewModels.Pages.Doctor;
 public partial class DoctorMedicationDetailsPageViewModel : ViewModelBase, IPageViewModel
 {
     private readonly ISukiDialogManager _dialogManager;
-    private readonly IServiceProvider _serviceProvider;
     private readonly ILogger _logger;
-
-    public string? PageTitle => $"Viewing {Medication?.Name}";
-
-    [ObservableProperty]
-    public partial Medication? Medication { get; set; }
+    private readonly IServiceProvider _serviceProvider;
 
     public DoctorMedicationDetailsPageViewModel(
         ISukiDialogManager dialogManager,
@@ -32,7 +27,12 @@ public partial class DoctorMedicationDetailsPageViewModel : ViewModelBase, IPage
         _logger = logger;
     }
 
-    /// <summary>Opens the modal for prescribing the <see cref="Medication"/> to a patient.</summary>
+    [ObservableProperty]
+    public partial Medication? Medication { get; set; }
+
+    public string? PageTitle => $"Viewing {Medication?.Name}";
+
+    /// <summary>Opens the modal for prescribing the <see cref="Medication" /> to a patient.</summary>
     [RelayCommand]
     private async Task PrescribeToPatient()
     {

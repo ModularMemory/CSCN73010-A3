@@ -5,25 +5,25 @@ using SukiUI.Dialogs;
 
 namespace Drugly.AvaloniaApp.Extensions;
 
-/// <summary>Provides extensions for <see cref="SukiDialogBuilder"/>s.</summary>
+/// <summary>Provides extensions for <see cref="SukiDialogBuilder" />s.</summary>
 public static class SukiDialogBuilderExtensions
 {
     extension(SukiDialogBuilder builder)
     {
-        /// <summary>Presents <paramref name="content"/> inside a <see cref="GroupBox"/>.</summary>
+        /// <summary>Presents <paramref name="content" /> inside a <see cref="GroupBox" />.</summary>
         /// <param name="content">The content to present.</param>
-        /// <returns>The <see cref="SukiDialogBuilder"/> instance.</returns>
-        /// <remarks><see cref="ViewModelBase"/>s will be presented with a <see cref="ContentControl"/>.</remarks>
+        /// <returns>The <see cref="SukiDialogBuilder" /> instance.</returns>
+        /// <remarks><see cref="ViewModelBase" />s will be presented with a <see cref="ContentControl" />.</remarks>
         public SukiDialogBuilder WithGroupedContent(object content)
         {
             return builder.WithGroupedContent(null, content);
         }
 
-        /// <summary>Presents <paramref name="content"/> and an optional <paramref name="title"/> inside a <see cref="GroupBox"/>.</summary>
-        /// <param name="title">An optional title displayed above the <paramref name="content"/>.</param>
+        /// <summary>Presents <paramref name="content" /> and an optional <paramref name="title" /> inside a <see cref="GroupBox" />.</summary>
+        /// <param name="title">An optional title displayed above the <paramref name="content" />.</param>
         /// <param name="content">The content to present.</param>
-        /// <returns>The <see cref="SukiDialogBuilder"/> instance.</returns>
-        /// <remarks><see cref="ViewModelBase"/>s will be presented with a <see cref="ContentControl"/>.</remarks>
+        /// <returns>The <see cref="SukiDialogBuilder" /> instance.</returns>
+        /// <remarks><see cref="ViewModelBase" />s will be presented with a <see cref="ContentControl" />.</remarks>
         public SukiDialogBuilder WithGroupedContent(object? title, object content)
         {
             return builder.WithContent(new GroupBox
@@ -31,8 +31,8 @@ public static class SukiDialogBuilderExtensions
                 Header = UseContentControlIfNeeded(title),
                 Content = new ScrollViewer
                 {
-                    Content = UseContentControlIfNeeded(content)
-                }
+                    Content = UseContentControlIfNeeded(content),
+                },
             });
 
             // Allows ViewModels to be passed as content and have their respective views rendered
@@ -41,27 +41,27 @@ public static class SukiDialogBuilderExtensions
                 return content is ViewModelBase
                     ? new ContentControl
                     {
-                        Content = content
+                        Content = content,
                     }
                     : content;
             }
         }
 
         /// <summary>
-        /// Adds Support for awaiting the dialog to being closed via <see cref="SukiDialogBuilder.TryShowAsync(CancellationToken)" />.
+        ///     Adds Support for awaiting the dialog to being closed via <see cref="SukiDialogBuilder.TryShowAsync(CancellationToken)" />.
         /// </summary>
         /// <remarks>
-        /// Does not add any action buttons. The result from awaiting <see cref="SukiDialogBuilder.TryShowAsync(CancellationToken)" /> will always be <see langword="false"/>.
+        ///     Does not add any action buttons. The result from awaiting <see cref="SukiDialogBuilder.TryShowAsync(CancellationToken)" /> will always be <see langword="false" />.
         /// </remarks>
-        /// <returns>The <see cref="SukiDialogBuilder"/> instance.</returns>
+        /// <returns>The <see cref="SukiDialogBuilder" /> instance.</returns>
         public SukiDialogBuilder WithoutResult()
         {
             builder.Completion = new TaskCompletionSource<bool>();
             return builder;
         }
 
-        /// <inheritdoc cref="SukiUI.Dialogs.FluentSukiDialogBuilder.WithYesNoResult"/>
-        /// <returns>The <see cref="SukiDialogBuilder"/> instance.</returns>
+        /// <inheritdoc cref="SukiUI.Dialogs.FluentSukiDialogBuilder.WithYesNoResult" />
+        /// <returns>The <see cref="SukiDialogBuilder" /> instance.</returns>
         public SukiDialogBuilder WithColoredYesNoResult(object? yesButtonContent, object? noButtonContent)
         {
             builder.Completion = new TaskCompletionSource<bool>();
@@ -74,7 +74,7 @@ public static class SukiDialogBuilderExtensions
 
         /// <summary>Provides a callback that will be called when this dialog is dismissed for any reason.</summary>
         /// <param name="proc">The callback, with the dialog result as a parameter.</param>
-        /// <returns>The <see cref="SukiDialogBuilder"/> instance.</returns>
+        /// <returns>The <see cref="SukiDialogBuilder" /> instance.</returns>
         public SukiDialogBuilder OnClosed(Action<bool> proc)
         {
             if (builder.Completion is null)

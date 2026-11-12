@@ -8,8 +8,8 @@ namespace Drugly.AvaloniaApp.Services;
 /// <inheritdoc />
 public sealed class ImageDetailsService : IImageDetailsService
 {
-    private readonly IHttpClientFactory _httpClientFactory;
     private readonly IAccountSessionService _accountSessionService;
+    private readonly IHttpClientFactory _httpClientFactory;
     private readonly ILogger _logger;
 
     public ImageDetailsService(

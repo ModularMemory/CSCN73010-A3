@@ -1,4 +1,3 @@
-using Drugly.DTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Drugly.Server.Controllers;

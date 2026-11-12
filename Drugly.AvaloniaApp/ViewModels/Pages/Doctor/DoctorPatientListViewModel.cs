@@ -3,11 +3,8 @@ using Avalonia.Controls.Notifications;
 using Avalonia.Threading;
 using CommunityToolkit.Mvvm.Input;
 using Drugly.AvaloniaApp.Extensions;
-using Drugly.AvaloniaApp.Services;
 using Drugly.AvaloniaApp.Services.Interfaces;
-using Drugly.AvaloniaApp.ViewModels.Pages.Patient;
 using Drugly.DTO;
-using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using SukiUI.Dialogs;
 
@@ -16,15 +13,11 @@ namespace Drugly.AvaloniaApp.ViewModels.Pages.Doctor;
 /// <summary>VM for the patient list page for doctors.</summary>
 public partial class DoctorPatientListViewModel : ViewModelBase, IPageViewModel
 {
-    private readonly IPageRouter _pageRouter;
     private readonly IAccountDetailsService _accountDetailsService;
     private readonly ISukiDialogManager _dialogManager;
-    private readonly IServiceProvider _serviceProvider;
     private readonly ILogger _logger;
-
-    public string? PageTitle => "Choose a Patient to View";
-
-    public AvaloniaList<AccountDetails> Patients { get; } = [];
+    private readonly IPageRouter _pageRouter;
+    private readonly IServiceProvider _serviceProvider;
 
     public DoctorPatientListViewModel(
         IPageRouter pageRouter,
@@ -42,6 +35,10 @@ public partial class DoctorPatientListViewModel : ViewModelBase, IPageViewModel
 
         Dispatcher.UIThread.InvokeAsync(LoadPatients);
     }
+
+    public AvaloniaList<AccountDetails> Patients { get; } = [];
+
+    public string? PageTitle => "Choose a Patient to View";
 
     private async Task LoadPatients()
     {

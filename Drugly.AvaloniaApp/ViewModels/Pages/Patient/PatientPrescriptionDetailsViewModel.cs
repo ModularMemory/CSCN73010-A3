@@ -16,27 +16,11 @@ namespace Drugly.AvaloniaApp.ViewModels.Pages.Patient;
 public partial class PatientPrescriptionDetailsViewModel : ViewModelBase, IPageViewModel
 {
     private readonly ISukiDialogManager _dialogManager;
-    private readonly IPageRouter _pageRouter;
     private readonly ILogger _logger;
+    private readonly IPageRouter _pageRouter;
     private readonly IPrescriptionDetailsService _prescriptionDetailsService;
 
-    public string? PageTitle => $"Viewing Prescription for {Prescription?.Medication.Name}";
-
-    [ObservableProperty]
-    public partial AccountDetails? Patient { get; set; }
-
-    [ObservableProperty]
-    public partial PatientPrescription? Prescription { get; set; }
-
-    [ObservableProperty]
-    public partial string DoctorPrescriptionStateText { get; set; } = "Approve";
-
-    [ObservableProperty]
-    public partial int StepIndex { get; set; }
-
-    private IReadOnlyList<PrescriptionState> _stepsInternal;
-    public IEnumerable<string> Steps { get; }
-    public IAccountSessionService AccountSessionService { get; }
+    private readonly IReadOnlyList<PrescriptionState> _stepsInternal;
 
     public PatientPrescriptionDetailsViewModel(
         ISukiDialogManager dialogManager,
@@ -66,6 +50,46 @@ public partial class PatientPrescriptionDetailsViewModel : ViewModelBase, IPageV
             ValidateAllProperties();
         });
     }
+
+    [ObservableProperty]
+    public partial AccountDetails? Patient { get; set; }
+
+    [ObservableProperty]
+    public partial PatientPrescription? Prescription { get; set; }
+
+    [ObservableProperty]
+    public partial string DoctorPrescriptionStateText { get; set; } = "Approve";
+
+    [ObservableProperty]
+    public partial int StepIndex { get; set; }
+
+    public IEnumerable<string> Steps { get; }
+    public IAccountSessionService AccountSessionService { get; }
+
+    [ObservableProperty]
+    [NotifyDataErrorInfo]
+    [Required]
+    public partial string? CardHolder { get; set; }
+
+    [ObservableProperty]
+    [NotifyDataErrorInfo]
+    [Required]
+    [Length(16, 19)]
+    public partial string? CardNumber { get; set; }
+
+    [ObservableProperty]
+    [NotifyDataErrorInfo]
+    [Required]
+    [Length(5, 5)]
+    public partial string? CardExpiry { get; set; }
+
+    [ObservableProperty]
+    [NotifyDataErrorInfo]
+    [Required]
+    [Length(3, 3)]
+    public partial string? CardCCV { get; set; }
+
+    public string? PageTitle => $"Viewing Prescription for {Prescription?.Medication.Name}";
 
     [RelayCommand]
     private async Task RefreshPrescription()
@@ -161,27 +185,4 @@ public partial class PatientPrescriptionDetailsViewModel : ViewModelBase, IPageV
 
         Prescription = new PatientPrescription(prescription, Prescription.Medication);
     }
-
-    [ObservableProperty]
-    [NotifyDataErrorInfo]
-    [Required]
-    public partial string? CardHolder { get; set; }
-
-    [ObservableProperty]
-    [NotifyDataErrorInfo]
-    [Required]
-    [Length(16, 19)]
-    public partial string? CardNumber { get; set; }
-
-    [ObservableProperty]
-    [NotifyDataErrorInfo]
-    [Required]
-    [Length(5, 5)]
-    public partial string? CardExpiry { get; set; }
-
-    [ObservableProperty]
-    [NotifyDataErrorInfo]
-    [Required]
-    [Length(3, 3)]
-    public partial string? CardCCV { get; set; }
 }

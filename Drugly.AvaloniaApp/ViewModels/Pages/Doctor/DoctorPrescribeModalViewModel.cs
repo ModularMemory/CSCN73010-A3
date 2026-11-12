@@ -15,10 +15,25 @@ namespace Drugly.AvaloniaApp.ViewModels.Pages.Doctor;
 /// <summary>VM for the medication prescription modal.</summary>
 public partial class DoctorPrescribeModalViewModel : ViewModelBase
 {
-    private readonly ISukiDialog _dialog;
     private readonly IAccountDetailsService _accountDetailsService;
-    private readonly IPrescriptionDetailsService _prescriptionDetailsService;
+    private readonly ISukiDialog _dialog;
     private readonly IImageDetailsService _imageDetailsService;
+    private readonly IPrescriptionDetailsService _prescriptionDetailsService;
+
+    public DoctorPrescribeModalViewModel(
+        ISukiDialog dialog,
+        Medication medication,
+        IServiceProvider serviceProvider
+    )
+    {
+        Medication = medication;
+        _dialog = dialog;
+        _accountDetailsService = serviceProvider.GetRequiredService<IAccountDetailsService>();
+        _prescriptionDetailsService = serviceProvider.GetRequiredService<IPrescriptionDetailsService>();
+        _imageDetailsService = serviceProvider.GetRequiredService<IImageDetailsService>();
+
+        ValidateAllProperties();
+    }
 
     /// <summary>The medication associated with the dialog.</summary>
     public Medication Medication { get; }
@@ -68,21 +83,6 @@ public partial class DoctorPrescribeModalViewModel : ViewModelBase
     [NotifyDataErrorInfo]
     [MaxLength(500)]
     public partial string? PrescriptionNotes { get; set; }
-
-    public DoctorPrescribeModalViewModel(
-        ISukiDialog dialog,
-        Medication medication,
-        IServiceProvider serviceProvider
-    )
-    {
-        Medication = medication;
-        _dialog = dialog;
-        _accountDetailsService = serviceProvider.GetRequiredService<IAccountDetailsService>();
-        _prescriptionDetailsService = serviceProvider.GetRequiredService<IPrescriptionDetailsService>();
-        _imageDetailsService = serviceProvider.GetRequiredService<IImageDetailsService>();
-
-        ValidateAllProperties();
-    }
 
     /// <summary>Closes the dialog.</summary>
     [RelayCommand]

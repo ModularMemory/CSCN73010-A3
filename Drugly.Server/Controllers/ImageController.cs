@@ -8,9 +8,9 @@ namespace Drugly.Server.Controllers;
 /// <summary>A controller that handles routes for managing images</summary>
 public class ImageController : DruglyController
 {
+    private readonly IAuthorizationService _authorizationService;
     private readonly IImageDatabaseService _databaseService;
     private readonly ILogger<ImageController> _logger;
-    private readonly IAuthorizationService _authorizationService;
 
     public ImageController(
         IImageDatabaseService databaseService,
@@ -64,7 +64,7 @@ public class ImageController : DruglyController
         }
 
         var id = Guid.NewGuid().ToString();
-        string contentType = Request.ContentType ?? "image/bmp";
+        var contentType = Request.ContentType ?? "image/bmp";
         try
         {
             await _databaseService.SetImageById(id, contentType, content);

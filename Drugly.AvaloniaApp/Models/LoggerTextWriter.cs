@@ -6,22 +6,24 @@ using Serilog.Events;
 
 namespace Drugly.AvaloniaApp.Models;
 
-/// <summary>Forwards all writes to a given <see cref="ILogger"/>.</summary>
+/// <summary>Forwards all writes to a given <see cref="ILogger" />.</summary>
 public class LoggerTextWriter : TextWriter
 {
+    private readonly StringBuilder _builder = new();
     private readonly LogEventLevel _logLevel;
     private readonly ILogger _logger;
-    private readonly StringBuilder _builder = new();
     private bool _terminatorStarted;
 
-    /// <summary>Initializes a new <see cref="LoggerTextWriter"/>.</summary>
-    /// <param name="logLevel">The <see cref="LogEventLevel"/> that all forwarded writes will use.</param>
+    /// <summary>Initializes a new <see cref="LoggerTextWriter" />.</summary>
+    /// <param name="logLevel">The <see cref="LogEventLevel" /> that all forwarded writes will use.</param>
     /// <param name="logger">The logger to forward to.</param>
     public LoggerTextWriter([ServiceKey] LogEventLevel logLevel, ILogger logger)
     {
         _logLevel = logLevel;
         _logger = logger;
     }
+
+    public override Encoding Encoding => Encoding.Unicode;
 
     public override void Write(string? value)
     {
@@ -88,6 +90,4 @@ public class LoggerTextWriter : TextWriter
         _builder.Clear();
         _terminatorStarted = false;
     }
-
-    public override Encoding Encoding => Encoding.Unicode;
 }

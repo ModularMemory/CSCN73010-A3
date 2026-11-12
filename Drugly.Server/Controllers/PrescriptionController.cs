@@ -8,11 +8,11 @@ namespace Drugly.Server.Controllers;
 /// <summary>A controller that handles route requests for prescriptions</summary>
 public class PrescriptionController : DruglyController
 {
-    private readonly IPrescriptionDatabaseService _prescriptionDatabaseService;
     private readonly IAccountDatabaseService _accountDatabaseService;
-    private readonly IStateMachineFactoryService _stateMachineFactoryService;
-    private readonly ILogger<PrescriptionController> _logger;
     private readonly IAuthorizationService _authorizationService;
+    private readonly ILogger<PrescriptionController> _logger;
+    private readonly IPrescriptionDatabaseService _prescriptionDatabaseService;
+    private readonly IStateMachineFactoryService _stateMachineFactoryService;
 
     public PrescriptionController(
         IPrescriptionDatabaseService prescriptionDatabaseService,
@@ -38,7 +38,7 @@ public class PrescriptionController : DruglyController
             return Forbid(ApiResponse.Error("User is not authorized"));
         }
 
-        ApiResponse<Prescription> response = new ApiResponse<Prescription>();
+        var response = new ApiResponse<Prescription>();
         Response.Headers.ContentType = "application/json";
 
         try
@@ -69,7 +69,7 @@ public class PrescriptionController : DruglyController
             return Forbid(ApiResponse.Error("User is not authorized"));
         }
 
-        ApiResponse<List<Prescription>> response = new ApiResponse<List<Prescription>>();
+        var response = new ApiResponse<List<Prescription>>();
         Response.Headers.ContentType = "application/json";
 
         try
@@ -94,7 +94,7 @@ public class PrescriptionController : DruglyController
     [HttpPut("{stateInt:int}")]
     public async Task<IActionResult> AdvanceState(int stateInt, [FromBody] Prescription prescription)
     {
-        ApiResponse<Prescription> response = new ApiResponse<Prescription>();
+        var response = new ApiResponse<Prescription>();
         Response.Headers.ContentType = "application/json";
 
         var state = (PrescriptionState)stateInt;
@@ -103,7 +103,7 @@ public class PrescriptionController : DruglyController
             return BadRequest(ApiResponse.Error("Invalid state"));
         }
 
-        PrescriptionStateMachine prescriptionStateMachine = _stateMachineFactoryService.GetStateMachine(prescription);
+        var prescriptionStateMachine = _stateMachineFactoryService.GetStateMachine(prescription);
         try
         {
             prescriptionStateMachine.ProgressState(state);
@@ -137,10 +137,10 @@ public class PrescriptionController : DruglyController
     [HttpPost]
     public async Task<IActionResult> AddPrescription([FromBody] Prescription prescription)
     {
-        ApiResponse<Prescription> response = new ApiResponse<Prescription>();
+        var response = new ApiResponse<Prescription>();
         Response.Headers.ContentType = "application/json";
 
-        Guid prescriptionId = Guid.NewGuid();
+        var prescriptionId = Guid.NewGuid();
         prescription.PrescriptionId = prescriptionId;
         AccountCredentials prescribedUser;
         try

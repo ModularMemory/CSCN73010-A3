@@ -12,6 +12,13 @@ public sealed class AccountSessionService : IAccountSessionService
 
     private AuthenticationHeaderValue? _authHeader;
 
+    public AccountSessionService(
+        ILogger logger
+    )
+    {
+        _logger = logger;
+    }
+
     private AccountSession? Session
     {
         get;
@@ -27,13 +34,6 @@ public sealed class AccountSessionService : IAccountSessionService
     public AccountType AccountType => Session?.AccountType ?? AccountType.Unknown;
 
     public Guid AccountId => Session?.AccountId ?? Guid.Empty;
-
-    public AccountSessionService(
-        ILogger logger
-    )
-    {
-        _logger = logger;
-    }
 
     public void StoreSession(AccountSession session)
     {

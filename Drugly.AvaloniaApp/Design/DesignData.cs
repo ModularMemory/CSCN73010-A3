@@ -8,15 +8,6 @@ namespace Drugly.AvaloniaApp.Design;
 /// <summary>Provides static viewmodel instances for Avalonia preview to work with dependency injection.</summary>
 public static partial class DesignData
 {
-    /// <summary>A no-op application for satisfying the <see cref="Application"/> requirement of <see cref="Startup.ConfigureServices"/>.</summary>
-    private class DesignApplication : Application
-    {
-        public DesignApplication()
-        {
-            ApplicationLifetime = new ClassicDesktopStyleApplicationLifetime();
-        }
-    }
-
     static DesignData()
     {
         try
@@ -60,16 +51,25 @@ public static partial class DesignData
     public static Prescription[] ExamplePrescriptions =>
     [
         new(Guid.NewGuid(), Guid.NewGuid(), "1", 1, 10, "no notes", "https://upload.wikimedia.org/wikipedia/commons/1/15/Cat_August_2010-4.jpg"),
-        new(Guid.NewGuid(), Guid.NewGuid(), "5", 2, 30, "no notes", "https://upload.wikimedia.org/wikipedia/commons/1/15/Cat_August_2010-4.jpg")
+        new(Guid.NewGuid(), Guid.NewGuid(), "5", 2, 30, "no notes", "https://upload.wikimedia.org/wikipedia/commons/1/15/Cat_August_2010-4.jpg"),
     ];
 
     /// <summary>An example medication.</summary>
     public static Prescription ExamplePrescription => ExamplePrescriptions[0];
 
-    /// <summary>The design time <see cref="IServiceProvider"/>.</summary>
+    /// <summary>The design time <see cref="IServiceProvider" />.</summary>
     private static IServiceProvider ServiceProvider
         => field ??= new ServiceCollection()
             .ConfigureServices(new DesignApplication())
             .ConfigureViews()
             .BuildServiceProvider();
+
+    /// <summary>A no-op application for satisfying the <see cref="Application" /> requirement of <see cref="Startup.ConfigureServices" />.</summary>
+    private class DesignApplication : Application
+    {
+        public DesignApplication()
+        {
+            ApplicationLifetime = new ClassicDesktopStyleApplicationLifetime();
+        }
+    }
 }

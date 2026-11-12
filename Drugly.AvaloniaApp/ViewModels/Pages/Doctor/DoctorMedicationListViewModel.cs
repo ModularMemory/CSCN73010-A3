@@ -13,15 +13,11 @@ namespace Drugly.AvaloniaApp.ViewModels.Pages.Doctor;
 /// <summary>VM for the medication list page for doctors.</summary>
 public partial class DoctorMedicationListViewModel : ViewModelBase, IPageViewModel
 {
+    private readonly ISukiDialogManager _dialogManager;
+    private readonly ILogger _logger;
     private readonly IMedicationDetailsService _medicationDetailsService;
     private readonly IPageRouter _pageRouter;
-    private readonly ISukiDialogManager _dialogManager;
     private readonly IServiceProvider _serviceProvider;
-    private readonly ILogger _logger;
-
-    public string? PageTitle => "Choose a Medication to Prescribe";
-
-    public AvaloniaList<Medication> Medications { get; } = [];
 
     public DoctorMedicationListViewModel(
         IMedicationDetailsService medicationDetailsService,
@@ -39,6 +35,10 @@ public partial class DoctorMedicationListViewModel : ViewModelBase, IPageViewMod
 
         Dispatcher.UIThread.InvokeAsync(LoadMedications);
     }
+
+    public AvaloniaList<Medication> Medications { get; } = [];
+
+    public string? PageTitle => "Choose a Medication to Prescribe";
 
     private async Task LoadMedications()
     {

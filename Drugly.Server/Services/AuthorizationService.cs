@@ -1,9 +1,6 @@
 using System.Collections.Concurrent;
-using System.Net;
-using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using Drugly.DTO;
-using Drugly.Server.Models;
 using Drugly.Server.Services.Interfaces;
 using AccountType = Drugly.DTO.AccountType;
 
@@ -12,7 +9,6 @@ namespace Drugly.Server.Services;
 public class AuthorizationService : IAuthorizationService
 {
     private readonly RandomNumberGenerator _randomNumberGenerator = RandomNumberGenerator.Create();
-    private ConcurrentDictionary<string, AccountSession> Authorizations { get; } = [];
     private readonly TimeProvider _timeProvider;
 
     public AuthorizationService(TimeProvider timeProvider)
@@ -20,14 +16,16 @@ public class AuthorizationService : IAuthorizationService
         _timeProvider = timeProvider;
     }
 
+    private ConcurrentDictionary<string, AccountSession> Authorizations { get; } = [];
+
     public AccountSession CreateSession(AccountDetails accountDetails)
     {
         Span<byte> tokenBytes = stackalloc byte[16];
         _randomNumberGenerator.GetBytes(tokenBytes);
-        string token = Convert.ToBase64String(tokenBytes);
+        var token = Convert.ToBase64String(tokenBytes);
         var expiration = _timeProvider.GetUtcNow().AddHours(1);
 
-        AccountSession session = new AccountSession(token, accountDetails.AccountType, expiration, accountDetails.UserId);
+        var session = new AccountSession(token, accountDetails.AccountType, expiration, accountDetails.UserId);
         Authorizations.AddOrUpdate(token, _ => session, (_, __) => session);
 
         return session;

@@ -10,8 +10,8 @@ namespace Drugly.AvaloniaApp.Services;
 public class ViewFactory : IViewFactory
 {
     private readonly IServiceProvider _serviceProvider;
-    private readonly FrozenDictionary<Type, Type> _vmToViewMap;
     private readonly FrozenDictionary<Type, Type> _viewToVmMap;
+    private readonly FrozenDictionary<Type, Type> _vmToViewMap;
 
     public ViewFactory(IServiceProvider serviceProvider, Dictionary<Type, Type> vmToViewMap)
     {

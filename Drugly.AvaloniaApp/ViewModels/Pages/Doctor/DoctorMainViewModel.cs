@@ -12,8 +12,6 @@ public partial class DoctorMainViewModel : ViewModelBase, IPageViewModel
     private readonly IPageRouter _pageRouter;
     private readonly IServiceProvider _serviceProvider;
 
-    public string? PageTitle => "Hello, Doctor!";
-
     public DoctorMainViewModel(
         ISukiDialogManager dialogManager,
         IPageRouter pageRouter,
@@ -24,6 +22,8 @@ public partial class DoctorMainViewModel : ViewModelBase, IPageViewModel
         _pageRouter = pageRouter;
         _serviceProvider = serviceProvider;
     }
+
+    public string? PageTitle => "Hello, Doctor!";
 
     /// <summary>Requests a page navigation to the doctor's patient list page.</summary>
     [RelayCommand]

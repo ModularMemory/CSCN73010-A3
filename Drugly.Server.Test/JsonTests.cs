@@ -1,18 +1,10 @@
-using System.Text.Json;
 using Drugly.DTO;
 using Drugly.Server.Data;
-
 
 namespace Drugly.Server.Test;
 
 public class JsonTests : IDisposable
 {
-    private record TestObject
-    {
-        public string? Name { get; init; }
-        public int Value { get; init; }
-    }
-
     private readonly string _testDir;
 
     /// <summary>Setup.</summary>
@@ -29,7 +21,10 @@ public class JsonTests : IDisposable
             Directory.Delete(_testDir, true);
     }
 
-    private string GetFilePath(string fileName) => Path.Combine(_testDir, fileName);
+    private string GetFilePath(string fileName)
+    {
+        return Path.Combine(_testDir, fileName);
+    }
 
     [Fact]
     public async Task JsonWriter_And_Reader_RoundTrip_Generic()
@@ -39,7 +34,7 @@ public class JsonTests : IDisposable
         var data = new TestObject
         {
             Name = "Test",
-            Value = 42
+            Value = 42,
         };
 
         // Act
@@ -82,7 +77,7 @@ public class JsonTests : IDisposable
         )
         {
             PrescriptionId = Guid.NewGuid(),
-            State = PrescriptionState.Unknown
+            State = PrescriptionState.Unknown,
         };
 
         if (File.Exists(filePath))
@@ -115,7 +110,7 @@ public class JsonTests : IDisposable
         )
         {
             PrescriptionId = Guid.NewGuid(),
-            State = PrescriptionState.Unknown
+            State = PrescriptionState.Unknown,
         };
 
         if (File.Exists(filePath))
@@ -130,5 +125,11 @@ public class JsonTests : IDisposable
 
         // Cleanup
         File.Delete(filePath);
+    }
+
+    private record TestObject
+    {
+        public string? Name { get; init; }
+        public int Value { get; init; }
     }
 }

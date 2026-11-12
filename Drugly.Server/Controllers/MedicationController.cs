@@ -23,7 +23,7 @@ public class MedicationController : DruglyController
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetById(Guid id)
     {
-        ApiResponse<Medication> response = new ApiResponse<Medication>();
+        var response = new ApiResponse<Medication>();
         Response.Headers.ContentType = "application/json";
 
         try
@@ -48,7 +48,7 @@ public class MedicationController : DruglyController
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        ApiResponse<Medication[]> response = new ApiResponse<Medication[]>();
+        var response = new ApiResponse<Medication[]>();
         Response.Headers.ContentType = "application/json";
 
         try

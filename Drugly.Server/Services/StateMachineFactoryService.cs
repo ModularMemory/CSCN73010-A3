@@ -15,7 +15,7 @@ public class StateMachineFactoryService : IStateMachineFactoryService
 
     public PrescriptionStateMachine GetStateMachine(Prescription prescription)
     {
-        ILogger<PrescriptionStateMachine> logger = _serviceProvider.GetRequiredService<ILogger<PrescriptionStateMachine>>();
+        var logger = _serviceProvider.GetRequiredService<ILogger<PrescriptionStateMachine>>();
         return new PrescriptionStateMachine(logger, prescription);
     }
 }

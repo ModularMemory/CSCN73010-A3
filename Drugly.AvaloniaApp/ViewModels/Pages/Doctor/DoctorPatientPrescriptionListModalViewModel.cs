@@ -13,14 +13,11 @@ namespace Drugly.AvaloniaApp.ViewModels.Pages.Doctor;
 /// <summary>VM for the doctor's view of patient prescriptions.</summary>
 public partial class DoctorPatientPrescriptionListModalViewModel : ViewModelBase
 {
-    public AccountDetails Patient { get; }
     private readonly ISukiDialog _dialog;
-    private readonly IServiceProvider _serviceProvider;
-    private readonly IPrescriptionDetailsService _prescriptionDetailsService;
     private readonly IMedicationDetailsService _medicationDetailsService;
     private readonly IPageRouter _pageRouter;
-
-    public AvaloniaList<PatientPrescription> Prescriptions { get; } = [];
+    private readonly IPrescriptionDetailsService _prescriptionDetailsService;
+    private readonly IServiceProvider _serviceProvider;
 
     public DoctorPatientPrescriptionListModalViewModel(
         ISukiDialog dialog,
@@ -37,6 +34,10 @@ public partial class DoctorPatientPrescriptionListModalViewModel : ViewModelBase
 
         Dispatcher.UIThread.InvokeAsync(GetPrescriptions);
     }
+
+    public AccountDetails Patient { get; }
+
+    public AvaloniaList<PatientPrescription> Prescriptions { get; } = [];
 
     private async Task GetPrescriptions()
     {

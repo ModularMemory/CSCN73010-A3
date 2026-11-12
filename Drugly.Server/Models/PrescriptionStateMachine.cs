@@ -8,9 +8,6 @@ public class PrescriptionStateMachine : IAsyncDisposable, IDisposable
     /// <summary>The service for logging</summary>
     private readonly ILogger<PrescriptionStateMachine> _logger;
 
-    /// <summary>The prescription being managed</summary>
-    public Prescription prescription { get; }
-
     /// <summary>The constructor for the prescription state machine</summary>
     /// <param name="logger">The logger that gets created in the factory</param>
     /// <param name="p">The prescription being managed</param>
@@ -18,6 +15,24 @@ public class PrescriptionStateMachine : IAsyncDisposable, IDisposable
     {
         _logger = logger;
         prescription = p;
+    }
+
+    /// <summary>The prescription being managed</summary>
+    public Prescription prescription { get; }
+
+    /// <summary>I don't know why this exists</summary>
+    /// <returns>mreow</returns>
+    /// <exception cref="NotImplementedException">mrrrp</exception>
+    public ValueTask DisposeAsync()
+    {
+        throw new NotImplementedException();
+    }
+
+    /// <summary>Or this tbh</summary>
+    /// <exception cref="NotImplementedException">mrreow</exception>
+    public void Dispose()
+    {
+        throw new NotImplementedException();
     }
 
     /// <summary>A method to progress the state of the prescription</summary>
@@ -87,20 +102,5 @@ public class PrescriptionStateMachine : IAsyncDisposable, IDisposable
         }
 
         return false;
-    }
-
-    /// <summary>I don't know why this exists</summary>
-    /// <returns>mreow</returns>
-    /// <exception cref="NotImplementedException">mrrrp</exception>
-    public ValueTask DisposeAsync()
-    {
-        throw new NotImplementedException();
-    }
-
-    /// <summary>Or this tbh</summary>
-    /// <exception cref="NotImplementedException">mrreow</exception>
-    public void Dispose()
-    {
-        throw new NotImplementedException();
     }
 }

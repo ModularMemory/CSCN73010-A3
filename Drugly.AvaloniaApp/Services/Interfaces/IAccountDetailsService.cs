@@ -3,7 +3,7 @@ using Drugly.DTO;
 
 namespace Drugly.AvaloniaApp.Services.Interfaces;
 
-/// <summary>Provides functionality related to <see cref="AccountDetails"/>.</summary>
+/// <summary>Provides functionality related to <see cref="AccountDetails" />.</summary>
 public interface IAccountDetailsService
 {
     /// <summary>Gets an account by a given id.</summary>

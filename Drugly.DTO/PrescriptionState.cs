@@ -24,5 +24,5 @@ public enum PrescriptionState
     PickedUp,
 
     /// <summary>The prescription was deleted or canceled.</summary>
-    Cancelled
+    Cancelled,
 }

@@ -92,7 +92,7 @@ public static partial class DesignData
                     PrescriptionNotes = "Consume while meowing for best results",
                     DosagePerDay = "5,000,000,000mg",
                     DaysBetweenDosage = 0,
-                    DaysPrescribed = ulong.MaxValue
+                    DaysPrescribed = ulong.MaxValue,
                 };
             }
 

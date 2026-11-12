@@ -5,7 +5,7 @@ namespace Drugly.Server.Services;
 
 public class ImageDatabaseService : IImageDatabaseService
 {
-    private string _folderPath = "images";
+    private readonly string _folderPath = "images";
 
     public Task<Stream> GetImageById(string id, out string contentType)
     {

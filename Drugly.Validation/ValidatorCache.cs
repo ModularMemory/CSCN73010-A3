@@ -5,24 +5,26 @@ using System.Runtime.CompilerServices;
 
 namespace Drugly.Validation;
 
-/// <summary>Stores cached <see cref="ValidationAttribute"/> instances for manually validating values.</summary>
-/// <typeparam name="TValidator">The <see cref="ValidationAttribute"/> to validate with.</typeparam>
+/// <summary>Stores cached <see cref="ValidationAttribute" /> instances for manually validating values.</summary>
+/// <typeparam name="TValidator">The <see cref="ValidationAttribute" /> to validate with.</typeparam>
 public static class ValidatorCache<TValidator> where TValidator : ValidationAttribute, new()
 {
     private static readonly TValidator Validator = new();
 
-    /// <summary>Determines if a <paramref name="value"/> is valid according to the <typeparamref name="TValidator"/>.</summary>
+    /// <summary>Determines if a <paramref name="value" /> is valid according to the <typeparamref name="TValidator" />.</summary>
     /// <param name="value">The value to validate.</param>
     /// <param name="message">An error message associated with the failed validation.</param>
-    /// <returns><see langword="true"/> if the value is valid, otherwise <see langword="false"/>.</returns>
+    /// <returns><see langword="true" /> if the value is valid, otherwise <see langword="false" />.</returns>
     public static bool IsValid(object? value, [NotNullWhen(false)] out string? message)
-        => IsValidNoCache(Validator, value, out message);
+    {
+        return IsValidNoCache(Validator, value, out message);
+    }
 
-    /// <summary>Determines if a <paramref name="value"/> is valid according to the <paramref name="validator"/>.</summary>
+    /// <summary>Determines if a <paramref name="value" /> is valid according to the <paramref name="validator" />.</summary>
     /// <param name="validator">The validator to validate with.</param>
     /// <param name="value">The value to validate.</param>
     /// <param name="message">An error message associated with the failed validation.</param>
-    /// <returns><see langword="true"/> if the value is valid, otherwise <see langword="false"/>.</returns>
+    /// <returns><see langword="true" /> if the value is valid, otherwise <see langword="false" />.</returns>
     [MethodImpl(MethodImplOptions.Synchronized)]
     public static bool IsValidNoCache(TValidator validator, object? value, [NotNullWhen(false)] out string? message)
     {

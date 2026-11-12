@@ -17,8 +17,8 @@ public interface IAccountSessionService
     /// <summary>Clears the current account login session.</summary>
     void ClearSession();
 
-    /// <summary>Tries to set the current session token as the default authorization request header on the given <see cref="HttpClient"/>.</summary>
+    /// <summary>Tries to set the current session token as the default authorization request header on the given <see cref="HttpClient" />.</summary>
     /// <param name="httpClient">The client to authorize.</param>
-    /// <returns><see langword="true"/> if the client was successfully authorized, otherwise <see langword="false"/>.</returns>
+    /// <returns><see langword="true" /> if the client was successfully authorized, otherwise <see langword="false" />.</returns>
     bool TryAuthorizeClient(HttpClient httpClient);
 }

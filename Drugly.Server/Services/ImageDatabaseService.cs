@@ -24,6 +24,7 @@ public class ImageDatabaseService : IImageDatabaseService
 
     public async Task SetImageById(string id, string contentType, Stream content)
     {
+        id = Path.GetFileName(id);
         var path = Path.Combine(_folderPath, $"{id}.bin");
 
         Directory.CreateDirectory(_folderPath);

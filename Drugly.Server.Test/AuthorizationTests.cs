@@ -10,12 +10,9 @@ namespace Drugly.Server.Test;
 
 public class AuthorizationTests
 {
-    private IAuthorizationService AuthorizationServiceFactory => CreateAuthService(TimeProvider.System);
+    private static IAuthorizationService AuthorizationServiceFactory => CreateAuthService(TimeProvider.System);
 
-    private IAuthorizationService CreateAuthService(TimeProvider tp)
-    {
-        return new AuthorizationService(tp);
-    }
+    private static IAuthorizationService CreateAuthService(TimeProvider tp) => new AuthorizationService(tp);
 
     [Fact]
     public void TestCreateSession()

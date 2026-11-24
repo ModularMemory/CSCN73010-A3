@@ -80,7 +80,7 @@ public class MedicationDatabaseService : IHostedService, IMedicationDatabaseServ
 
         if (medications.Length == 0)
         {
-            throw new MedicationNotFoundException("Medications not found");
+            throw new MedicationNotFoundException();
         }
 
         return Task.FromResult(medications);

@@ -62,7 +62,7 @@ public class AccountDatabaseService : IHostedService, IAccountDatabaseService
     {
         if (!_emailToId.TryGetValue(email, out var id))
         {
-            throw new AccountNotFoundException("Email not found");
+            throw new AccountNotFoundException();
         }
 
         return Task.FromResult(id);
@@ -82,7 +82,7 @@ public class AccountDatabaseService : IHostedService, IAccountDatabaseService
 
         if (patients.Length == 0)
         {
-            throw new AccountNotFoundException("Patient accounts not found");
+            throw new AccountNotFoundException();
         }
 
         return Task.FromResult(patients);

@@ -9,6 +9,7 @@ public class ImageDatabaseService : IImageDatabaseService
 
     public Task<Stream> GetImageById(string id, out string contentType)
     {
+        id = Path.GetFileName(id);
         var path = Path.Combine(_folderPath, $"{id}.bin");
 
         if (!File.Exists(path))

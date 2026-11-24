@@ -49,6 +49,6 @@ public sealed class ImageDetailsService : IImageDetailsService
             throw new IOException("Failed to create image uri");
         }
 
-        return uri!;
+        return uri;
     }
 }

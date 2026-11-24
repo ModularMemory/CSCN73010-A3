@@ -147,7 +147,9 @@ public static class Startup
 #if DEBUG
             return new HttpClientHandler
             {
+#pragma warning disable S4830 // Server certificates should be verified during SSL/TLS connections
                 ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
+#pragma warning restore S4830 // Server certificates should be verified during SSL/TLS connections
             };
 #else
             return new HttpClientHandler();

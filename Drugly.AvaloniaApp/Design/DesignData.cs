@@ -65,7 +65,7 @@ public static partial class DesignData
             .BuildServiceProvider();
 
     /// <summary>A no-op application for satisfying the <see cref="Application" /> requirement of <see cref="Startup.ConfigureServices" />.</summary>
-    private class DesignApplication : Application
+    private sealed class DesignApplication : Application
     {
         public DesignApplication()
         {

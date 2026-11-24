@@ -49,7 +49,7 @@ internal static class NumberConverters
         }
     }
 
-    private class ConverterImpl<TResult>(
+    private sealed class ConverterImpl<TResult>(
         Func<double, double, TResult> convert,
         Func<double, double, TResult>? convertBack = null
     ) : IValueConverter
@@ -80,7 +80,7 @@ internal static class NumberConverters
         }
     }
 
-    private class MultiConverterImpl<TResult>(
+    private sealed class MultiConverterImpl<TResult>(
         TResult initialValue,
         Func<TResult, double, TResult> convert
     ) : IMultiValueConverter

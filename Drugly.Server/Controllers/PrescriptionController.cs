@@ -149,7 +149,7 @@ public class PrescriptionController : DruglyController
         }
         catch (AccountNotFoundException ex)
         {
-            _logger.LogError(ex, "Failed to find account {id} associated with prescription {id}", prescription.PatientId, prescriptionId);
+            _logger.LogError(ex, "Failed to find account {AccountId} associated with prescription {PrescriptionId}", prescription.PatientId, prescriptionId);
             return NotFound(ApiResponse.Error("Not found"));
         }
         catch (Exception ex)

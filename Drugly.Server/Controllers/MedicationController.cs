@@ -32,16 +32,16 @@ public class MedicationController : DruglyController
         }
         catch (MedicationNotFoundException ex)
         {
-            _logger.LogError(ex, "Failed to find medication {id}", id);
+            _logger.LogError(ex, "Failed to find medication {Id}", id);
             return NotFound(ApiResponse.Error("Medication not found"));
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Failed to fetch medication {id}", id);
+            _logger.LogError(ex, "Failed to fetch medication {Id}", id);
             return InternalServerError(ApiResponse.Error("Internal server error"));
         }
 
-        _logger.LogInformation("Medication {id} successfully retrieved", id);
+        _logger.LogInformation("Medication {Id} successfully retrieved", id);
         return Ok(response);
     }
 
@@ -66,7 +66,7 @@ public class MedicationController : DruglyController
             return InternalServerError(ApiResponse.Error("Internal server error"));
         }
 
-        _logger.LogInformation("{count} Medications successfully retrieved", response.Data.Length);
+        _logger.LogInformation("{Count} Medications successfully retrieved", response.Data.Length);
         return Ok(response);
     }
 
@@ -79,11 +79,11 @@ public class MedicationController : DruglyController
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Failed to set medication {id}", id);
+            _logger.LogError(ex, "Failed to set medication {Id}", id);
             return InternalServerError(ApiResponse.Error("Internal server error"));
         }
 
-        _logger.LogInformation("Medication {id} successfully set", id);
+        _logger.LogInformation("Medication {Id} successfully set", id);
         return Ok();
     }
 }

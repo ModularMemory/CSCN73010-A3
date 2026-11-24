@@ -47,16 +47,16 @@ public class PrescriptionController : DruglyController
         }
         catch (PrescriptionNotFoundException ex)
         {
-            _logger.LogError(ex, "Failed to find prescription {id}", id);
+            _logger.LogError(ex, "Failed to find prescription {Id}", id);
             return NotFound(ApiResponse.Error("Not found"));
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Failed to fetch prescription {id}", id);
+            _logger.LogError(ex, "Failed to fetch prescription {Id}", id);
             return InternalServerError(ApiResponse.Error("Internal server error"));
         }
 
-        _logger.LogInformation("Prescription {id} successfully retrieved", id);
+        _logger.LogInformation("Prescription {Id} successfully retrieved", id);
         return Ok(response);
     }
 
@@ -78,16 +78,16 @@ public class PrescriptionController : DruglyController
         }
         catch (PrescriptionNotFoundException ex)
         {
-            _logger.LogError(ex, "Failed to find prescriptions associated with account {id}", id);
+            _logger.LogError(ex, "Failed to find prescriptions associated with account {Id}", id);
             return NotFound(ApiResponse.Error("Not found"));
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Failed to fetch prescriptions associated with account {id}", id);
+            _logger.LogError(ex, "Failed to fetch prescriptions associated with account {Id}", id);
             return InternalServerError(ApiResponse.Error("Internal server error"));
         }
 
-        _logger.LogInformation("Prescriptions associated with account {id} successfully retrieved", id);
+        _logger.LogInformation("Prescriptions associated with account {Id} successfully retrieved", id);
         return Ok(response);
     }
 
@@ -110,7 +110,7 @@ public class PrescriptionController : DruglyController
         }
         catch (ArgumentOutOfRangeException ex)
         {
-            _logger.LogError(ex, "Desired State {state} Not Recognized", state);
+            _logger.LogError(ex, "Desired prescription state {State} not recognized", state);
             return BadRequest(ApiResponse.Error("Invalid state"));
         }
         catch (Exception ex)
@@ -125,12 +125,12 @@ public class PrescriptionController : DruglyController
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Failed to update prescription {id}", prescription.PrescriptionId);
+            _logger.LogError(ex, "Failed to update prescription {Id}", prescription.PrescriptionId);
             return InternalServerError(ApiResponse.Error("Internal server error"));
         }
 
         response.Data = prescription;
-        _logger.LogInformation("Prescription State Progressed to {state}", state);
+        _logger.LogInformation("Prescription state progressed to {State}", state);
         return Ok(response);
     }
 
@@ -154,7 +154,7 @@ public class PrescriptionController : DruglyController
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "failed to fetch account {id}", prescription.PatientId);
+            _logger.LogError(ex, "failed to fetch account {Id}", prescription.PatientId);
             return InternalServerError(ApiResponse.Error("Internal server error"));
         }
 
@@ -170,12 +170,12 @@ public class PrescriptionController : DruglyController
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Failed to set new prescription {id}", prescriptionId);
+            _logger.LogError(ex, "Failed to set new prescription {Id}", prescriptionId);
             return InternalServerError(ApiResponse.Error("Internal server error"));
         }
 
         response.Data = prescription;
-        _logger.LogInformation("New Prescription {id} Set", prescriptionId);
+        _logger.LogInformation("New PIdscription {id} Set", prescriptionId);
         return Ok(response);
     }
 }

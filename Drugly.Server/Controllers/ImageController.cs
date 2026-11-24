@@ -34,16 +34,16 @@ public class ImageController : DruglyController
         }
         catch (ImageNotFoundException ex)
         {
-            _logger.LogError(ex, "Failed to find image {id}", id);
+            _logger.LogError(ex, "Failed to find image {Id}", id);
             return NotFound(ApiResponse.Error("Image not found"));
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Failed to fetch image {id}", id);
+            _logger.LogError(ex, "Failed to fetch image {Id}", id);
             return InternalServerError(ApiResponse.Error("Internal server error"));
         }
 
-        _logger.LogInformation("Image {id} retrieved successfully", id);
+        _logger.LogInformation("Image {Id} retrieved successfully", id);
         return Ok(response);
     }
 
@@ -71,11 +71,11 @@ public class ImageController : DruglyController
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Failed to set image {id}", id);
+            _logger.LogError(ex, "Failed to set image {Id}", id);
             return InternalServerError(ApiResponse.Error("Internal server error"));
         }
 
-        _logger.LogInformation("Image {id} set successfully", id);
+        _logger.LogInformation("Image {Id} set successfully", id);
         return Ok(new ApiResponse<string> { Data = id });
     }
 }

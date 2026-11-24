@@ -55,16 +55,16 @@ public class AccountController : DruglyController
         }
         catch (AccountNotFoundException ex)
         {
-            _logger.LogError(ex, "Failed to find account {id}", id);
+            _logger.LogError(ex, "Failed to find account {Id}", id);
             return NotFound(ApiResponse.Error("Account not found"));
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Failed to fetch account {id}", id);
+            _logger.LogError(ex, "Failed to fetch account {Id}", id);
             return InternalServerError(ApiResponse.Error("Internal server error"));
         }
 
-        _logger.LogInformation("Account {id} successfully retrieved", id);
+        _logger.LogInformation("Account {Id} successfully retrieved", id);
         return Ok(response);
     }
 
@@ -91,16 +91,16 @@ public class AccountController : DruglyController
         }
         catch (AccountNotFoundException ex)
         {
-            _logger.LogError(ex, "Failed to find Id associated with email: {email}", email);
+            _logger.LogError(ex, "Failed to find Id associated with email: {Email}", email);
             return NotFound(ApiResponse.Error("Id not found"));
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Failed to fetch Id associated with email: {email}", email);
+            _logger.LogError(ex, "Failed to fetch Id associated with email: {Email}", email);
             return InternalServerError(ApiResponse.Error("Internal server error"));
         }
 
-        _logger.LogInformation("Id associated with {email} successfully retrieved", email);
+        _logger.LogInformation("Id associated with {Email} successfully retrieved", email);
         return Ok(response);
     }
 
@@ -118,11 +118,11 @@ public class AccountController : DruglyController
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Failed to set account {id} details", id);
+            _logger.LogError(ex, "Failed to set account {Id} details", id);
             return InternalServerError(ApiResponse.Error("Internal Server Error"));
         }
 
-        _logger.LogInformation("Account {id} details successfully set", id);
+        _logger.LogInformation("Account {Id} details successfully set", id);
         return Ok();
     }
 
@@ -164,7 +164,7 @@ public class AccountController : DruglyController
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Failed to fetch account {id}", id);
+            _logger.LogError(ex, "Failed to fetch account {Id}", id);
             return InternalServerError(ApiResponse.Error("Internal Server Error"));
         }
 

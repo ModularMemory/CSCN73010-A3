@@ -118,10 +118,10 @@ public class JsonTests : IDisposable
 
         // Act
         await JsonWritePrescription.SavePrescription(prescription, filePath);
-        var content = await File.ReadAllTextAsync(filePath);
+        var content = await File.ReadAllTextAsync(filePath, TestContext.Current.CancellationToken);
 
         // Assert
-        Assert.True(content.Contains("\n"), "JSON is not indented (no new lines found).");
+        Assert.True(content.Contains('\n'), "JSON is not indented (no new lines found).");
 
         // Cleanup
         File.Delete(filePath);
